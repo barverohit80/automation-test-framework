@@ -1,0 +1,42 @@
+spring:
+  profiles:
+    active: ${TEST_ENV:dev}
+    default: dev
+
+app:
+  environment: default
+  base-url: "https://demoqa.com"
+
+  browser:
+    default: chrome
+    headless: false
+    implicit-wait-seconds: 10
+    explicit-wait-seconds: 15
+    page-load-timeout-seconds: 30
+
+  parallel:
+    enabled: true
+    thread-count: 4
+    cross-browser:
+      enabled: false
+      browsers:
+        - chrome
+
+  selenium-grid:
+    enabled: false
+    hub-url: "http://localhost:4444/wd/hub"
+
+  timeouts:
+    short: 5
+    medium: 10
+    long: 30
+
+  reporting:
+    screenshot-on-failure: true
+    screenshot-dir: "target/screenshots"
+
+  data:
+    random-seed: 0
+    alphanumeric-length: 10
+    numeric-length: 8
+    prefix: "AUTO"

@@ -1,0 +1,48 @@
+app:
+  environment: uat
+  base-url: "https://demoqa.com"
+  api-base-url: "https://demoqa.com"
+
+  browser:
+    default: chrome
+    headless: true
+    implicit-wait-seconds: 15
+    explicit-wait-seconds: 20
+    page-load-timeout-seconds: 45
+
+  parallel:
+    enabled: true
+    thread-count: 6
+    cross-browser:
+      enabled: true
+      browsers:
+        - chrome
+        - firefox
+        - edge
+
+  selenium-grid:
+    enabled: false
+    hub-url: "http://localhost:4444/wd/hub"
+
+  credentials:
+    admin:
+      username: "admin_uat"
+      password: "uat_admin_pass789"
+    standard:
+      username: "user_uat"
+      password: "uat_user_pass012"
+
+  timeouts:
+    short: 10
+    medium: 20
+    long: 60
+
+  reporting:
+    screenshot-on-failure: true
+    screenshot-dir: "target/screenshots"
+
+  data:
+    random-seed: 0
+    alphanumeric-length: 12
+    numeric-length: 10
+    prefix: "UAT"
