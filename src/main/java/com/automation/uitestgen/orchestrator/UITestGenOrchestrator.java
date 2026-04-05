@@ -2,7 +2,7 @@ package com.automation.uitestgen.orchestrator;
 
 import com.automation.driver.DriverFactory;
 import com.automation.uitestgen.capture.UISpecCapture;
-import com.automation.uitestgen.client.ClaudeUIClient;
+import com.automation.uitestgen.client.LlmClient;
 import com.automation.uitestgen.model.GeneratedUITest;
 import com.automation.uitestgen.model.PageSnapshot;
 import com.automation.uitestgen.prompt.UIPromptBuilder;
@@ -42,7 +42,7 @@ public class UITestGenOrchestrator {
 
     @Autowired private UISpecCapture capture;
     @Autowired private UIPromptBuilder promptBuilder;
-    @Autowired private ClaudeUIClient claudeClient;
+    @Autowired private LlmClient llmClient;
     @Autowired private UITestFileWriter fileWriter;
     @Autowired private DriverFactory driverFactory;
 
@@ -79,16 +79,16 @@ public class UITestGenOrchestrator {
         String systemPrompt = promptBuilder.getSystemPrompt();
         String userPrompt   = promptBuilder.buildUserPrompt(enriched);
 
-        log.info("[UITestGen] -> Calling Claude API...");
+        log.info("[UITestGen] -> Calling LLM provider: {}", llmClient.providerName());
 
-        // 3. Call Claude (use vision mode if screenshot available and HTML is thin)
+        // 3. Call LLM (use vision mode if screenshot available and HTML is thin)
         String rawResponse;
         if (enriched.getScreenshotBase64() != null
                 && enriched.getFilteredHtml() != null
                 && enriched.getFilteredHtml().length() < 500) {
-            rawResponse = claudeClient.generateWithScreenshot(systemPrompt, userPrompt, enriched.getScreenshotBase64());
+            rawResponse = llmClient.generateWithScreenshot(systemPrompt, userPrompt, enriched.getScreenshotBase64());
         } else {
-            rawResponse = claudeClient.generate(systemPrompt, userPrompt);
+            rawResponse = llmClient.generate(systemPrompt, userPrompt);
         }
 
         log.info("[UITestGen] -> Parsing response...");
