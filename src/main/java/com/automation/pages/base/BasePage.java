@@ -2,6 +2,7 @@ package com.automation.pages.base;
 
 import com.automation.config.EnvironmentConfig;
 import com.automation.driver.DriverFactory;
+import com.automation.locator.strategy.ResilientLocatorStrategy;
 import com.automation.utils.WaitUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
@@ -19,6 +20,10 @@ import java.util.List;
  * Uses Selenium PageFactory to initialize @FindBy elements.
  * Subclasses are Spring beans — just annotate with @Component @Scope("cucumber-glue")
  * and their @FindBy fields are auto-initialized.
+ *
+ * Also provides resilient (self-healing) locator methods via {@link ResilientLocatorStrategy}.
+ * Use {@code resilientClick("pageName", "elementName")} etc. for locators loaded from
+ * JSON files at resources/locators/, with automatic primary → fallback healing.
  */
 @Slf4j
 public abstract class BasePage {
@@ -31,6 +36,9 @@ public abstract class BasePage {
 
     @Autowired
     protected WaitUtils waitUtils;
+
+    @Autowired
+    protected ResilientLocatorStrategy resilientLocator;
 
     /** Flag to track whether PageFactory has been initialized for this instance. */
     private boolean pageFactoryInitialized = false;
@@ -130,6 +138,49 @@ public abstract class BasePage {
 
     protected Object executeJs(String script, Object... args) {
         return ((JavascriptExecutor) getDriver()).executeScript(script, args);
+    }
+
+    // ─── Resilient (self-healing) locator methods ─────────────────────
+    //
+    // These use JSON-defined locators from resources/locators/{page}.json
+    // with automatic primary → fallback healing. Use these for elements
+    // that are prone to locator changes across releases.
+
+    /**
+     * Click using resilient locator (primary → fallback).
+     * @param pageName    matches JSON file, e.g. "LoginPage"
+     * @param elementName matches element in JSON, e.g. "loginButton"
+     */
+    protected void resilientClick(String pageName, String elementName) {
+        resilientLocator.click(pageName, elementName);
+    }
+
+    /**
+     * Type text using resilient locator.
+     */
+    protected void resilientType(String pageName, String elementName, String text) {
+        resilientLocator.type(pageName, elementName, text);
+    }
+
+    /**
+     * Get text using resilient locator.
+     */
+    protected String resilientGetText(String pageName, String elementName) {
+        return resilientLocator.getText(pageName, elementName);
+    }
+
+    /**
+     * Find element using resilient locator.
+     */
+    protected WebElement resilientFind(String pageName, String elementName) {
+        return resilientLocator.find(pageName, elementName);
+    }
+
+    /**
+     * Check if element is displayed using resilient locator.
+     */
+    protected boolean resilientIsDisplayed(String pageName, String elementName) {
+        return resilientLocator.isDisplayed(pageName, elementName);
     }
 
     // ─── Utility ─────────────────────────────────────────────────────

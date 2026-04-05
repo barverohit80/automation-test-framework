@@ -1,0 +1,149 @@
+{
+  "pageName": "LoginPage",
+  "pageUrl": "https://demoqa.com/login",
+  "elements": [
+    {
+      "elementName": "usernameInput",
+      "tag": "input",
+      "primary": {
+        "type": "id",
+        "value": "userName",
+        "confidence": 0.9,
+        "description": "stable id attribute"
+      },
+      "fallbacks": [
+        {
+          "type": "css",
+          "value": "input[placeholder='UserName']",
+          "confidence": 0.7,
+          "description": "placeholder attribute"
+        },
+        {
+          "type": "xpath",
+          "value": "//input[@type='text' and @placeholder='UserName']",
+          "confidence": 0.5,
+          "description": "type + placeholder combo"
+        },
+        {
+          "type": "css",
+          "value": "#userForm input[type='text']",
+          "confidence": 0.3,
+          "description": "form context + type"
+        }
+      ],
+      "lastCaptured": "2026-04-05T14:30:00"
+    },
+    {
+      "elementName": "passwordInput",
+      "tag": "input",
+      "primary": {
+        "type": "id",
+        "value": "password",
+        "confidence": 0.9,
+        "description": "stable id attribute"
+      },
+      "fallbacks": [
+        {
+          "type": "css",
+          "value": "input[placeholder='Password']",
+          "confidence": 0.7,
+          "description": "placeholder attribute"
+        },
+        {
+          "type": "css",
+          "value": "input[type='password']",
+          "confidence": 0.6,
+          "description": "input type — usually one password field per page"
+        },
+        {
+          "type": "xpath",
+          "value": "//input[@type='password']",
+          "confidence": 0.4,
+          "description": "xpath type fallback"
+        }
+      ],
+      "lastCaptured": "2026-04-05T14:30:00"
+    },
+    {
+      "elementName": "loginButton",
+      "tag": "button",
+      "primary": {
+        "type": "id",
+        "value": "login",
+        "confidence": 0.9,
+        "description": "stable id attribute"
+      },
+      "fallbacks": [
+        {
+          "type": "xpath",
+          "value": "//button[normalize-space()='Login']",
+          "confidence": 0.5,
+          "description": "button text"
+        },
+        {
+          "type": "css",
+          "value": "#login",
+          "confidence": 0.9,
+          "description": "css id selector"
+        },
+        {
+          "type": "css",
+          "value": "button.btn-primary",
+          "confidence": 0.3,
+          "description": "button class"
+        }
+      ],
+      "lastCaptured": "2026-04-05T14:30:00"
+    },
+    {
+      "elementName": "newUserButton",
+      "tag": "button",
+      "primary": {
+        "type": "id",
+        "value": "newUser",
+        "confidence": 0.9,
+        "description": "stable id attribute"
+      },
+      "fallbacks": [
+        {
+          "type": "xpath",
+          "value": "//button[normalize-space()='New User']",
+          "confidence": 0.5,
+          "description": "button text"
+        },
+        {
+          "type": "css",
+          "value": "#newUser",
+          "confidence": 0.9,
+          "description": "css id selector"
+        }
+      ],
+      "lastCaptured": "2026-04-05T14:30:00"
+    },
+    {
+      "elementName": "outputMessage",
+      "tag": "div",
+      "primary": {
+        "type": "id",
+        "value": "name",
+        "confidence": 0.9,
+        "description": "stable id attribute"
+      },
+      "fallbacks": [
+        {
+          "type": "css",
+          "value": "#output #name",
+          "confidence": 0.7,
+          "description": "parent-child id combo"
+        },
+        {
+          "type": "css",
+          "value": "div#name",
+          "confidence": 0.6,
+          "description": "tag + id"
+        }
+      ],
+      "lastCaptured": "2026-04-05T14:30:00"
+    }
+  ]
+}
