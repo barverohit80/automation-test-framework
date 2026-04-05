@@ -2,7 +2,7 @@
 Feature: DemoQA Home Page
   As a user I want to verify the home page displays all category cards
 
-  @smoke
+  @smoke1 @generate
   Scenario: Home page displays all 6 category cards
     Given the user is on the home page
     Then the home page should be displayed

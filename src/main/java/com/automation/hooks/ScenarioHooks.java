@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -129,7 +130,7 @@ public class ScenarioHooks {
     public void generateUITest(Scenario scenario) {
         log.info("[UITestGen] @generate hook triggered for scenario: {}", scenario.getName());
 
-        Set<String> tags = scenario.getSourceTagNames();
+        Collection<String> tags = scenario.getSourceTagNames();
 
         // ── Extract pageName from @page:<Name> tag ──
         String pageName = tags.stream()
