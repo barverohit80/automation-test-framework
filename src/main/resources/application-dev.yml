@@ -45,3 +45,7 @@ app:
     alphanumeric-length: 10
     numeric-length: 8
     prefix: "DEV"
+
+# AI Test Generation — override model or dirs per environment if needed
+# anthropic:
+#   model: claude-sonnet-4-20250514
