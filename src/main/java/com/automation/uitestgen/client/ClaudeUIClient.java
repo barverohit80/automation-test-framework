@@ -2,6 +2,7 @@ package com.automation.uitestgen.client;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -10,25 +11,34 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Client for calling the Anthropic Claude API to generate UI test code.
- * Supports both text-only and vision (screenshot) modes.
+ * Claude (Anthropic) implementation of LlmClient.
+ * Active when: testgen.llm.provider=claude (default if property is missing).
+ *
+ * application.yml:
+ *   testgen:
+ *     llm:
+ *       provider: claude
+ *   anthropic:
+ *     api:
+ *       key: ${ANTHROPIC_API_KEY}
+ *       model: claude-sonnet-4-6          # or claude-opus-4-6 / claude-haiku-4-5-20251001
  */
 @Slf4j
-@Component
-public class ClaudeUIClient {
+@Component("claudeClient")
+@ConditionalOnProperty(name = "testgen.llm.provider", havingValue = "claude", matchIfMissing = true)
+public class ClaudeUIClient implements LlmClient {
+
+    private static final String API_URL = "https://api.anthropic.com/v1/messages";
 
     @Value("${anthropic.api.key:}")
     private String apiKey;
 
-    @Value("${anthropic.model:claude-sonnet-4-20250514}")
+    @Value("${anthropic.api.model:claude-sonnet-4-6}")
     private String model;
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private static final String API_URL = "https://api.anthropic.com/v1/messages";
 
-    /**
-     * Generate test code from a text prompt (DOM + accessibility tree).
-     */
+    @Override
     public String generate(String systemPrompt, String userPrompt) {
         validateApiKey();
 
@@ -51,10 +61,7 @@ public class ClaudeUIClient {
         return extractText(response);
     }
 
-    /**
-     * Vision mode — sends a screenshot alongside the text prompt.
-     * Use when the page is canvas-heavy or DOM doesn't reflect visual layout.
-     */
+    @Override
     public String generateWithScreenshot(String systemPrompt, String userPrompt, String base64Png) {
         validateApiKey();
 
@@ -88,6 +95,11 @@ public class ClaudeUIClient {
         );
 
         return extractText(response);
+    }
+
+    @Override
+    public String providerName() {
+        return "Claude (" + model + ")";
     }
 
     private HttpHeaders buildHeaders() {
