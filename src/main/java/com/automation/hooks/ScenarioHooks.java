@@ -4,6 +4,9 @@ import com.automation.config.EnvironmentConfig;
 import com.automation.context.ScenarioContext;
 import com.automation.context.TestContext;
 import com.automation.driver.DriverFactory;
+import com.automation.uitestgen.model.GeneratedUITest;
+import com.automation.uitestgen.model.PageSnapshot;
+import com.automation.uitestgen.orchestrator.UITestGenOrchestrator;
 import com.automation.utils.ScreenshotUtils;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -13,6 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Cucumber hooks — manages driver lifecycle per scenario.
@@ -48,11 +54,14 @@ public class ScenarioHooks {
     private static final String NEW_BROWSER_TAG = "@newbrowser";
     private static final String API_TAG = "@api";
 
+    private static final String GENERATE_TAG = "@generate";
+
     @Autowired private DriverFactory driverFactory;
     @Autowired private TestContext testContext;
     @Autowired private ScenarioContext scenarioContext;
     @Autowired private ScreenshotUtils screenshotUtils;
     @Autowired private EnvironmentConfig config;
+    @Autowired private UITestGenOrchestrator uiTestGenOrchestrator;
 
     @Before(order = 0)
     public void setUp(Scenario scenario) {
@@ -98,6 +107,99 @@ public class ScenarioHooks {
         Allure.parameter("Thread", String.valueOf(Thread.currentThread().getId()));
 
         scenarioContext.init(scenario, browser);
+    }
+
+    /**
+     * Generates UI test artifacts (Page Object, Feature file, Step Definitions) via Claude
+     * before the scenario executes. Triggered only for scenarios tagged with @generate.
+     *
+     * Runs at order=1 so the driver is already initialised by setUp (order=0).
+     *
+     * Required scenario tags:
+     *   @generate                          — activates this hook
+     *   @page:<PageName>                   — logical page name, e.g. @page:LoginPage
+     *   @url:<encoded-url>                 — target page URL (colons after scheme must be present)
+     *
+     * Optional scenario tags:
+     *   @tag:<cucumber-tag>                — extra Cucumber tags on generated scenarios (repeatable)
+     *
+     * The scenario name is used as the testScenarioDescription sent to the LLM.
+     */
+    @Before(value = GENERATE_TAG, order = 1)
+    public void generateUITest(Scenario scenario) {
+        log.info("[UITestGen] @generate hook triggered for scenario: {}", scenario.getName());
+
+        Set<String> tags = scenario.getSourceTagNames();
+
+        // ── Extract pageName from @page:<Name> tag ──
+        String pageName = tags.stream()
+                .filter(t -> t.startsWith("@page:"))
+                .map(t -> t.substring("@page:".length()))
+                .findFirst()
+                .orElse(derivePageName(scenario.getName()));
+
+        // ── Extract target URL from @url:<url> tag (optional) ──
+        String pageUrl = tags.stream()
+                .filter(t -> t.startsWith("@url:"))
+                .map(t -> t.substring("@url:".length()))
+                .findFirst()
+                .orElse(null);
+
+        // ── Collect extra Cucumber tags from @tag:<value> tags ──
+        List<String> cucumberTags = tags.stream()
+                .filter(t -> t.startsWith("@tag:"))
+                .map(t -> t.substring("@tag:".length()))
+                .collect(java.util.stream.Collectors.toList());
+
+        // ── Navigate to the page if a URL was provided ──
+        if (pageUrl != null) {
+            log.info("[UITestGen] Navigating to {} before capture", pageUrl);
+            driverFactory.getDriver().get(pageUrl);
+        }
+
+        // ── Build PageSnapshot with all required details ──
+        PageSnapshot snap = new PageSnapshot();
+        snap.setPageName(pageName);
+        snap.setPageUrl(pageUrl);
+        snap.setTestScenarioDescription(scenario.getName());
+        snap.setTags(cucumberTags);
+        snap.setExistingSteps(new ArrayList<>());
+
+        try {
+            GeneratedUITest result = uiTestGenOrchestrator.generate(snap);
+
+            log.info("[UITestGen] Generated Page Object : {}", result.getPageObjectFilePath());
+            log.info("[UITestGen] Generated Feature file: {}", result.getFeatureFilePath());
+            log.info("[UITestGen] Generated Step Defs   : {}", result.getStepDefFilePath());
+
+            if (result.getConflicts() != null && !result.getConflicts().isEmpty()) {
+                log.warn("[UITestGen] Duplicate step warnings: {}", result.getConflicts());
+            }
+
+            // Store the result in TestContext so step definitions can access it
+            testContext.set("generatedUITest", result);
+        } catch (Exception e) {
+            log.error("[UITestGen] Test generation failed for page '{}': {}", pageName, e.getMessage(), e);
+            throw new RuntimeException("UI test generation failed for page '" + pageName + "'", e);
+        }
+    }
+
+    /**
+     * Derives a PascalCase page name from the scenario name.
+     * E.g. "Login with valid credentials" → "LoginWithValidCredentials"
+     */
+    private String derivePageName(String scenarioName) {
+        StringBuilder sb = new StringBuilder();
+        for (String word : scenarioName.split("\\s+")) {
+            if (!word.isEmpty()) {
+                sb.append(Character.toUpperCase(word.charAt(0)));
+                if (word.length() > 1) {
+                    sb.append(word.substring(1).toLowerCase());
+                }
+            }
+        }
+        String name = sb.toString().replaceAll("[^a-zA-Z0-9]", "");
+        return name.endsWith("Page") ? name : name + "Page";
     }
 
     @After(order = 0)
