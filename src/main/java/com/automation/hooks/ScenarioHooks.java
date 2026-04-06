@@ -4,6 +4,8 @@ import com.automation.config.EnvironmentConfig;
 import com.automation.context.ScenarioContext;
 import com.automation.context.TestContext;
 import com.automation.driver.DriverFactory;
+import com.automation.locator.extractor.LocatorExtractor;
+import com.automation.locator.store.LocatorStore;
 import com.automation.uitestgen.model.GeneratedUITest;
 import com.automation.uitestgen.model.PageSnapshot;
 import com.automation.uitestgen.orchestrator.UITestGenOrchestrator;
@@ -63,6 +65,8 @@ public class ScenarioHooks {
     @Autowired private ScreenshotUtils screenshotUtils;
     @Autowired private EnvironmentConfig config;
     @Autowired private UITestGenOrchestrator uiTestGenOrchestrator;
+    @Autowired private LocatorExtractor locatorExtractor;
+    @Autowired private LocatorStore locatorStore;
 
     @Before(order = 0)
     public void setUp(Scenario scenario) {
@@ -156,6 +160,16 @@ public class ScenarioHooks {
         if (pageUrl != null) {
             log.info("[UITestGen] Navigating to {} before capture", pageUrl);
             driverFactory.getDriver().get(pageUrl);
+        }
+
+        // ── Extract and save locators to resources/locators/{pageName}.json ──
+        try {
+            var pageLocators = locatorExtractor.extractAll(driverFactory.getDriver(), pageName);
+            locatorStore.save(pageLocators);
+            log.info("[UITestGen] Saved locators for '{}' ({} elements)",
+                    pageName, pageLocators.getElements().size());
+        } catch (Exception e) {
+            log.warn("[UITestGen] Locator extraction failed for '{}': {}", pageName, e.getMessage());
         }
 
         // ── Build PageSnapshot with all required details ──
