@@ -2,34 +2,20 @@ package com.automation.pages.login;
 
 import com.automation.pages.base.BasePage;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
  * DemoQA Login Page — https://demoqa.com/login
+ *
+ * Uses resilient (self-healing) locators loaded from resources/locators/LoginPage.json.
  */
 @Slf4j
 @Component
 @Scope("cucumber-glue")
 public class LoginPage extends BasePage {
 
-    @FindBy(id = "userName")
-    private WebElement usernameInput;
-
-    @FindBy(id = "password")
-    private WebElement passwordInput;
-
-    @FindBy(id = "login")
-    private WebElement loginButton;
-
-    @FindBy(id = "newUser")
-    private WebElement newUserButton;
-
-    @FindBy(id = "name")
-    private WebElement outputMessage;
+    private static final String PAGE = "LoginPage";
 
     public void open() {
         navigateTo("/login");
@@ -37,24 +23,22 @@ public class LoginPage extends BasePage {
 
     public void enterUsername(String username) {
         log.info("Entering username: {}", username);
-        type(usernameInput, username);
+        resilientType(PAGE, "usernameInput", username);
     }
 
     public void enterPassword(String password) {
         log.info("Entering password: ****");
-        type(passwordInput, password);
+        resilientType(PAGE, "passwordInput", password);
     }
 
     public void clickLogin() {
         log.info("Clicking login button");
-        scrollToElement(loginButton);
-        click(loginButton);
+        resilientClick(PAGE, "loginButton");
     }
 
     public void clickNewUser() {
         log.info("Clicking New User button");
-        scrollToElement(newUserButton);
-        click(newUserButton);
+        resilientClick(PAGE, "newUserButton");
     }
 
     public void loginAs(String username, String password) {
@@ -64,14 +48,14 @@ public class LoginPage extends BasePage {
     }
 
     public String getErrorMessage() {
-        return getText(outputMessage);
+        return resilientGetText(PAGE, "outputMessage");
     }
 
     public boolean isLoginPageDisplayed() {
-        return isDisplayed(By.id("login"));
+        return resilientIsDisplayed(PAGE, "loginButton");
     }
 
     public boolean isErrorMessageDisplayed() {
-        return isDisplayed(By.id("name"));
+        return resilientIsDisplayed(PAGE, "outputMessage");
     }
 }
