@@ -137,7 +137,7 @@ public class ScenarioHooks {
                 .filter(t -> t.startsWith("@page:"))
                 .map(t -> t.substring("@page:".length()))
                 .findFirst()
-                .orElse(derivePageName(scenario.getName()));
+                .orElse(derivePageName(scenario.getUri()));
 
         // ── Extract target URL from @url:<url> tag (optional) ──
         String pageUrl = tags.stream()
@@ -186,12 +186,16 @@ public class ScenarioHooks {
     }
 
     /**
-     * Derives a PascalCase page name from the scenario name.
-     * E.g. "Login with valid credentials" → "LoginWithValidCredentials"
+     * Derives a PascalCase page name from the feature file URI.
+     * E.g. "file:///path/to/login_credentials.feature" → "LoginCredentialsPage"
      */
-    private String derivePageName(String scenarioName) {
+    private String derivePageName(java.net.URI featureUri) {
+        String path = featureUri.getPath();
+        // Extract filename without extension
+        String fileName = path.substring(path.lastIndexOf('/') + 1).replaceFirst("\\.feature$", "");
+        // Split on underscores, hyphens, or spaces and convert to PascalCase
         StringBuilder sb = new StringBuilder();
-        for (String word : scenarioName.split("\\s+")) {
+        for (String word : fileName.split("[_\\-\\s]+")) {
             if (!word.isEmpty()) {
                 sb.append(Character.toUpperCase(word.charAt(0)));
                 if (word.length() > 1) {

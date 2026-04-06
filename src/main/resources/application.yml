@@ -31,6 +31,10 @@ app:
     medium: 10
     long: 30
 
+  locators:
+    resource-dir: "locators/"
+    file-dir: "src/main/resources/locators/"
+
   reporting:
     screenshot-on-failure: true
     screenshot-dir: "target/screenshots"

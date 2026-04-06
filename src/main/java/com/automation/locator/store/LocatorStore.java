@@ -4,6 +4,7 @@ import com.automation.locator.model.PageLocators;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -23,8 +24,11 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class LocatorStore {
 
-    private static final String LOCATORS_RESOURCE_DIR = "locators/";
-    private static final String LOCATORS_FILE_DIR = "src/main/resources/locators/";
+    @Value("${app.locators.resource-dir:locators/}")
+    private String locatorsResourceDir;
+
+    @Value("${app.locators.file-dir:src/main/resources/locators/}")
+    private String locatorsFileDir;
 
     private final ObjectMapper mapper = new ObjectMapper()
             .enable(SerializationFeature.INDENT_OUTPUT);
@@ -40,7 +44,7 @@ public class LocatorStore {
         PageLocators cached = cache.get(pageName);
         if (cached != null) return cached;
 
-        String resourcePath = LOCATORS_RESOURCE_DIR + pageName + ".json";
+        String resourcePath = locatorsResourceDir + pageName + ".json";
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
             if (is == null) {
                 log.debug("[LocatorStore] No locator file found: {}", resourcePath);
@@ -63,7 +67,7 @@ public class LocatorStore {
      */
     public void save(PageLocators pageLocators) throws IOException {
         String pageName = pageLocators.getPageName();
-        Path dir = Paths.get(LOCATORS_FILE_DIR);
+        Path dir = Paths.get(locatorsFileDir);
         Files.createDirectories(dir);
 
         Path filePath = dir.resolve(pageName + ".json");
