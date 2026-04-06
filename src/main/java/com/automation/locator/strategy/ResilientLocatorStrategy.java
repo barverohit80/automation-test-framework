@@ -1,5 +1,6 @@
 package com.automation.locator.strategy;
 
+import com.automation.locator.extractor.LocatorExtractor;
 import com.automation.locator.model.ElementLocators;
 import com.automation.locator.model.LocatorEntry;
 import com.automation.locator.model.PageLocators;
@@ -48,6 +49,9 @@ public class ResilientLocatorStrategy {
 
     @Autowired
     private LocatorStore locatorStore;
+
+    @Autowired
+    private LocatorExtractor locatorExtractor;
 
     @Autowired
     private com.automation.driver.DriverFactory driverFactory;
@@ -249,10 +253,18 @@ public class ResilientLocatorStrategy {
 
     private ElementLocators getElementLocators(String pageName, String elementName) {
         PageLocators page = locatorStore.load(pageName);
-        if (page == null) {
-            throw new IllegalStateException(
-                    "[Resilient] No locator file found for page: " + pageName
-                            + ". Run LocatorExtractor first or create resources/locators/" + pageName + ".json");
+        if (page == null || page.getElements() == null || page.getElements().isEmpty()) {
+            log.info("[Resilient] No locators found for '{}' — extracting from current page", pageName);
+            try {
+                page = locatorExtractor.extractAll(driverFactory.getDriver(), pageName);
+                locatorStore.save(page);
+                log.info("[Resilient] Auto-extracted and saved locators for '{}' ({} elements)",
+                        pageName, page.getElements().size());
+            } catch (Exception e) {
+                throw new IllegalStateException(
+                        "[Resilient] No locator file for page '" + pageName
+                                + "' and auto-extraction failed: " + e.getMessage(), e);
+            }
         }
 
         return page.getElements().stream()
