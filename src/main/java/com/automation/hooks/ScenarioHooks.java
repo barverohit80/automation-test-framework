@@ -112,6 +112,24 @@ public class ScenarioHooks {
         Allure.parameter("Thread", String.valueOf(Thread.currentThread().getId()));
 
         scenarioContext.init(scenario, browser);
+
+        // ── Extract and save locators if JSON doesn't exist yet ──
+        String pageName = scenario.getSourceTagNames().stream()
+                .filter(t -> t.startsWith("@page:"))
+                .map(t -> t.substring("@page:".length()))
+                .findFirst()
+                .orElse(derivePageName(scenario.getUri()));
+
+        if (locatorStore.load(pageName) == null) {
+            try {
+                var pageLocators = locatorExtractor.extractAll(driverFactory.getDriver(), pageName);
+                locatorStore.save(pageLocators);
+                log.info("[LocatorExtractor] Auto-extracted and saved locators for '{}'", pageName);
+            } catch (Exception e) {
+                log.debug("[LocatorExtractor] Could not auto-extract locators for '{}': {}",
+                        pageName, e.getMessage());
+            }
+        }
     }
 
     /**
