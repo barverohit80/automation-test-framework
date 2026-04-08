@@ -3,33 +3,21 @@ package com.automation.pages.login;
 import com.automation.pages.base.BasePage;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
  * DemoQA Login Page — https://demoqa.com/login
+ *
+ * Uses self-healing resilient locators from LoginPage.json
+ * Locators are ranked by confidence with primary + fallback strategy
  */
 @Slf4j
 @Component
 @Scope("cucumber-glue")
 public class LoginPage extends BasePage {
 
-    @FindBy(id = "userName")
-    private WebElement usernameInput;
-
-    @FindBy(id = "password")
-    private WebElement passwordInput;
-
-    @FindBy(id = "login")
-    private WebElement loginButton;
-
-    @FindBy(id = "newUser")
-    private WebElement newUserButton;
-
-    @FindBy(id = "name")
-    private WebElement outputMessage;
+    private static final String PAGE_NAME = "LoginPage";
 
     public void open() {
         navigateTo("/login");
@@ -37,24 +25,22 @@ public class LoginPage extends BasePage {
 
     public void enterUsername(String username) {
         log.info("Entering username: {}", username);
-        type(usernameInput, username);
+        resilientType(PAGE_NAME, "usernameInput", username);
     }
 
     public void enterPassword(String password) {
         log.info("Entering password: ****");
-        type(passwordInput, password);
+        resilientType(PAGE_NAME, "passwordInput", password);
     }
 
     public void clickLogin() {
         log.info("Clicking login button");
-        scrollToElement(loginButton);
-        click(loginButton);
+        resilientClick(PAGE_NAME, "loginButton");
     }
 
     public void clickNewUser() {
         log.info("Clicking New User button");
-        scrollToElement(newUserButton);
-        click(newUserButton);
+        resilientClick(PAGE_NAME, "newUserButton");
     }
 
     public void loginAs(String username, String password) {
@@ -64,14 +50,14 @@ public class LoginPage extends BasePage {
     }
 
     public String getErrorMessage() {
-        return getText(outputMessage);
+        return resilientGetText(PAGE_NAME, "outputMessage");
     }
 
     public boolean isLoginPageDisplayed() {
-        return isDisplayed(By.id("login"));
+        return resilientIsDisplayed(PAGE_NAME, "loginButton");
     }
 
     public boolean isErrorMessageDisplayed() {
-        return isDisplayed(By.id("name"));
+        return resilientIsDisplayed(PAGE_NAME, "outputMessage");
     }
 }

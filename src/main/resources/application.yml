@@ -41,26 +41,6 @@ app:
     numeric-length: 8
     prefix: "AUTO"
 
-# ═══════════ AI Test Generation ═══════════
-# Switch provider: set testgen.llm.provider to "claude" (default) or "gemini"
-testgen:
-  llm:
-    provider: ${LLM_PROVIDER:claude}
-  pageobject:
-    output-dir: "src/main/java/com/automation/pages/generated"
-  feature:
-    output-dir: "src/main/resources/features/generated"
-  stepdef:
-    output-dir: "src/main/java/com/automation/steps/generated"
-
-# ── Claude (Anthropic) — active when testgen.llm.provider=claude ──
-anthropic:
-  api:
-    key: ${ANTHROPIC_API_KEY:}
-    model: claude-sonnet-4-6
-
-# ── Gemini (Google) — active when testgen.llm.provider=gemini ──
-gemini:
-  api:
-    key: ${GEMINI_API_KEY:}
-    model: gemini-2.5-flash
+  locators:
+    resource-dir: "locators/"
+    file-dir: "src/main/resources/locators/"

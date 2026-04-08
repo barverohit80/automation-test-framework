@@ -2,6 +2,7 @@ package com.automation.pages.base;
 
 import com.automation.config.EnvironmentConfig;
 import com.automation.driver.DriverFactory;
+import com.automation.locator.strategy.ResilientLocatorStrategy;
 import com.automation.utils.WaitUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
@@ -31,6 +32,9 @@ public abstract class BasePage {
 
     @Autowired
     protected WaitUtils waitUtils;
+
+    @Autowired
+    protected ResilientLocatorStrategy resilientLocator;
 
     /** Flag to track whether PageFactory has been initialized for this instance. */
     private boolean pageFactoryInitialized = false;
@@ -130,6 +134,46 @@ public abstract class BasePage {
 
     protected Object executeJs(String script, Object... args) {
         return ((JavascriptExecutor) getDriver()).executeScript(script, args);
+    }
+
+    // ─── Resilient Locator Methods ────────────────────────────────────
+    // Self-healing locators with primary + fallback strategy
+
+    /**
+     * Resilient click: tries primary locator, falls back to alternatives.
+     * @param pageName Logical page name (e.g., "LoginPage")
+     * @param elementName Element name in locator store (e.g., "loginButton")
+     */
+    protected void resilientClick(String pageName, String elementName) {
+        resilientLocator.click(pageName, elementName);
+    }
+
+    /**
+     * Resilient type: finds element and clears/sends keys with fallback locators.
+     */
+    protected void resilientType(String pageName, String elementName, String text) {
+        resilientLocator.type(pageName, elementName, text);
+    }
+
+    /**
+     * Resilient getText: finds element and returns text content.
+     */
+    protected String resilientGetText(String pageName, String elementName) {
+        return resilientLocator.getText(pageName, elementName);
+    }
+
+    /**
+     * Resilient find: returns WebElement using self-healing locators.
+     */
+    protected WebElement resilientFind(String pageName, String elementName) {
+        return resilientLocator.find(pageName, elementName);
+    }
+
+    /**
+     * Resilient isDisplayed: checks if element is visible.
+     */
+    protected boolean resilientIsDisplayed(String pageName, String elementName) {
+        return resilientLocator.isDisplayed(pageName, elementName);
     }
 
     // ─── Utility ─────────────────────────────────────────────────────

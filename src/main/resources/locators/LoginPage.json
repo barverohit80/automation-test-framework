@@ -1,0 +1,132 @@
+{
+  "pageName": "LoginPage",
+  "pageUrl": "https://demoqa.com/login",
+  "elements": [
+    {
+      "elementName": "usernameInput",
+      "tag": "input",
+      "primary": {
+        "type": "id",
+        "value": "userName",
+        "confidence": 0.95,
+        "description": "Unique ID attribute"
+      },
+      "fallbacks": [
+        {
+          "type": "name",
+          "value": "userName",
+          "confidence": 0.90,
+          "description": "Name attribute on form element"
+        },
+        {
+          "type": "xpath",
+          "value": "//input[@placeholder='Enter UserName']",
+          "confidence": 0.70,
+          "description": "Placeholder attribute match"
+        }
+      ],
+      "lastCaptured": "2026-04-07T10:00:00"
+    },
+    {
+      "elementName": "passwordInput",
+      "tag": "input",
+      "primary": {
+        "type": "id",
+        "value": "password",
+        "confidence": 0.95,
+        "description": "Unique ID attribute"
+      },
+      "fallbacks": [
+        {
+          "type": "name",
+          "value": "password",
+          "confidence": 0.90,
+          "description": "Name attribute on form element"
+        },
+        {
+          "type": "xpath",
+          "value": "//input[@type='password']",
+          "confidence": 0.70,
+          "description": "Type attribute match for password field"
+        }
+      ],
+      "lastCaptured": "2026-04-07T10:00:00"
+    },
+    {
+      "elementName": "loginButton",
+      "tag": "button",
+      "primary": {
+        "type": "id",
+        "value": "login",
+        "confidence": 0.95,
+        "description": "Unique ID attribute"
+      },
+      "fallbacks": [
+        {
+          "type": "xpath",
+          "value": "//button[@id='login']",
+          "confidence": 0.85,
+          "description": "XPath ID match for button"
+        },
+        {
+          "type": "css",
+          "value": "button#login",
+          "confidence": 0.80,
+          "description": "CSS selector for login button"
+        }
+      ],
+      "lastCaptured": "2026-04-07T10:00:00"
+    },
+    {
+      "elementName": "newUserButton",
+      "tag": "button",
+      "primary": {
+        "type": "id",
+        "value": "newUser",
+        "confidence": 0.95,
+        "description": "Unique ID attribute"
+      },
+      "fallbacks": [
+        {
+          "type": "xpath",
+          "value": "//button[@id='newUser']",
+          "confidence": 0.85,
+          "description": "XPath ID match for button"
+        },
+        {
+          "type": "css",
+          "value": "button#newUser",
+          "confidence": 0.80,
+          "description": "CSS selector for new user button"
+        }
+      ],
+      "lastCaptured": "2026-04-07T10:00:00"
+    },
+    {
+      "elementName": "outputMessage",
+      "tag": "div",
+      "primary": {
+        "type": "id",
+        "value": "name",
+        "confidence": 0.95,
+        "description": "Unique ID attribute"
+      },
+      "fallbacks": [
+        {
+          "type": "xpath",
+          "value": "//div[@id='name']",
+          "confidence": 0.85,
+          "description": "XPath ID match for message div"
+        },
+        {
+          "type": "css",
+          "value": "div#name",
+          "confidence": 0.80,
+          "description": "CSS selector for output message"
+        }
+      ],
+      "lastCaptured": "2026-04-07T10:00:00"
+    }
+  ],
+  "lastUpdated": "2026-04-07T10:00:00"
+}
