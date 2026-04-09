@@ -62,6 +62,16 @@ public class LocatorExtractor {
             List<Map<String, Object>> elementData = (List<Map<String, Object>>)
                     ((JavascriptExecutor) driver).executeScript(getExtractionScript());
 
+            log.debug("[LocatorExtractor] JavaScript returned {} raw elements from DOM",
+                    elementData != null ? elementData.size() : 0);
+
+            if (elementData == null || elementData.isEmpty()) {
+                log.warn("[LocatorExtractor] ⚠ No interactable elements found on page '{}'. " +
+                        "Check if page is fully loaded or if elements are hidden/invisible.", pageName);
+                pageLocators.setElements(new ArrayList<>());
+                return pageLocators;
+            }
+
             List<ElementLocators> elements = new ArrayList<>();
 
             for (Map<String, Object> data : elementData) {
@@ -72,6 +82,7 @@ public class LocatorExtractor {
                 List<LocatorEntry> allLocators = generateLocatorStrategies(data);
 
                 if (allLocators.isEmpty()) {
+                    log.debug("[LocatorExtractor] Skipped element '{}' - no locators generated", elementName);
                     continue;
                 }
 
@@ -92,7 +103,11 @@ public class LocatorExtractor {
             }
 
             pageLocators.setElements(elements);
-            log.info("[LocatorExtractor] Extracted {} elements for page: {}", elements.size(), pageName);
+            log.info("[LocatorExtractor] ✓ Extracted {} elements for page: {}", elements.size(), pageName);
+
+            if (elements.isEmpty()) {
+                log.warn("[LocatorExtractor] ⚠ Extracted 0 elements. Check if page structure matches expected selectors.");
+            }
 
             return pageLocators;
         } catch (Exception e) {
@@ -256,7 +271,18 @@ public class LocatorExtractor {
                 document.querySelectorAll('*').forEach((el, index) => {
                     // Filter to interactable elements
                     if (!INTERACTABLE_TAGS.includes(el.tagName)) return;
-                    if (!el.offsetParent) return; // Hidden element
+
+                    // Skip truly invisible elements (not just display:none but actually rendered)
+                    // More lenient check: if element has size or is interactive, include it
+                    try {
+                        const style = window.getComputedStyle(el);
+                        // Skip elements with opacity 0 or visibility hidden
+                        if (style.opacity === '0' || style.visibility === 'hidden') return;
+                        // Skip aria-hidden elements
+                        if (el.getAttribute('aria-hidden') === 'true') return;
+                    } catch (e) {
+                        // If error getting style, include element anyway
+                    }
 
                     // Generate element name
                     let name = el.id || el.name || el.getAttribute('data-testid') || (el.textContent || '').substring(0, 20) || el.tagName.toLowerCase() + '_' + index;

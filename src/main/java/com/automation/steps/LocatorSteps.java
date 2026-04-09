@@ -41,8 +41,16 @@ public class LocatorSteps {
         log.info("[LocatorGeneration] Generating locators for page: {}", pageName);
 
         try {
+            // Wait for page to be fully loaded
+            Thread.sleep(2000);
+
             // Get current page URL and driver
             String pageUrl = driverFactory.getDriver().getCurrentUrl();
+            log.info("[LocatorGeneration] Current URL: {}", pageUrl);
+
+            // Log page title for debugging
+            String pageTitle = driverFactory.getDriver().getTitle();
+            log.info("[LocatorGeneration] Page title: {}", pageTitle);
 
             // Extract all interactable elements from DOM
             var pageLocators = locatorExtractor.extract(
@@ -54,8 +62,13 @@ public class LocatorSteps {
             // Save to JSON file
             locatorStore.save(pageLocators);
 
-            log.info("[LocatorGeneration] ✓ Saved {} elements to {}.json",
-                    pageLocators.getElements().size(), pageName);
+            int elementCount = pageLocators.getElements().size();
+            if (elementCount > 0) {
+                log.info("[LocatorGeneration] ✓ Saved {} elements to {}.json", elementCount, pageName);
+            } else {
+                log.warn("[LocatorGeneration] ⚠ No elements extracted for page '{}'. " +
+                        "Check if page is fully loaded or if DOM selectors need adjustment.", pageName);
+            }
 
         } catch (Exception e) {
             log.error("[LocatorGeneration] ✗ Failed to generate locators for page '{}': {}",
@@ -79,10 +92,16 @@ public class LocatorSteps {
         log.info("[LocatorGeneration] Generating locators for current page");
 
         try {
+            // Wait for page to be fully loaded
+            Thread.sleep(2000);
+
             // Get current page info
             String pageUrl = driverFactory.getDriver().getCurrentUrl();
+            String pageTitle = driverFactory.getDriver().getTitle();
             String pageName = derivePageNameFromUrl(pageUrl);
 
+            log.info("[LocatorGeneration] URL: {}", pageUrl);
+            log.info("[LocatorGeneration] Title: {}", pageTitle);
             log.info("[LocatorGeneration] Derived page name from URL: {}", pageName);
 
             // Extract all interactable elements from DOM
@@ -95,8 +114,13 @@ public class LocatorSteps {
             // Save to JSON file
             locatorStore.save(pageLocators);
 
-            log.info("[LocatorGeneration] ✓ Saved {} elements to {}.json",
-                    pageLocators.getElements().size(), pageName);
+            int elementCount = pageLocators.getElements().size();
+            if (elementCount > 0) {
+                log.info("[LocatorGeneration] ✓ Saved {} elements to {}.json", elementCount, pageName);
+            } else {
+                log.warn("[LocatorGeneration] ⚠ No elements extracted for page '{}'. " +
+                        "Check if page is fully loaded or if DOM selectors need adjustment.", pageName);
+            }
 
         } catch (Exception e) {
             log.error("[LocatorGeneration] ✗ Failed to generate locators: {}", e.getMessage(), e);
