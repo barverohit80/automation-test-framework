@@ -1,4 +1,4 @@
-@debug @skip
+@debug
 Feature: Debug Locator Extraction
 
   Scenario: Debug extraction on PracticeFormPage

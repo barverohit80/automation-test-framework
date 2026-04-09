@@ -1,6 +1,192 @@
 {
   "pageName" : "HomePage",
   "pageUrl" : "https://demoqa.com/",
-  "elements" : [ ],
-  "lastUpdated" : "2026-04-09T10:00:21.425951"
+  "elements" : [ {
+    "elementName" : "Elements",
+    "primary" : {
+      "type" : "xpath",
+      "value" : "//a[text()='Elements']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Elements')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:28:11.058898"
+  }, {
+    "elementName" : "Forms",
+    "primary" : {
+      "type" : "xpath",
+      "value" : "//a[text()='Forms']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Forms')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[2]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[2]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[2]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:28:11.059272"
+  }, {
+    "elementName" : "Alerts__Frame___Windows",
+    "primary" : {
+      "type" : "xpath",
+      "value" : "//a[text()='Alerts, Frame & Windows']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Alerts, Frame & Windows')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[3]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[3]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[3]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:28:11.05974"
+  }, {
+    "elementName" : "Widgets",
+    "primary" : {
+      "type" : "xpath",
+      "value" : "//a[text()='Widgets']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Widgets')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[4]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[4]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[4]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:28:11.059901"
+  }, {
+    "elementName" : "Interactions",
+    "primary" : {
+      "type" : "xpath",
+      "value" : "//a[text()='Interactions']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Interactions')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[5]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[5]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[5]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:28:11.060037"
+  }, {
+    "elementName" : "Book_Store_Application",
+    "primary" : {
+      "type" : "xpath",
+      "value" : "//a[text()='Book Store Application']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Book Store Application')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[6]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[6]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[6]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:28:11.060255"
+  } ],
+  "lastUpdated" : "2026-04-09T10:28:10.974056"
 }

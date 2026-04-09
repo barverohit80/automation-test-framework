@@ -58,12 +58,18 @@ public class LocatorExtractor {
 
         try {
             // Get all interactable elements from DOM
-            @SuppressWarnings("unchecked")
-            List<Map<String, Object>> elementData = (List<Map<String, Object>>)
-                    ((JavascriptExecutor) driver).executeScript(getExtractionScript());
+            Object result = ((JavascriptExecutor) driver).executeScript(getExtractionScript());
 
-            log.debug("[LocatorExtractor] JavaScript returned {} raw elements from DOM",
-                    elementData != null ? elementData.size() : 0);
+            log.info("[LocatorExtractor] JavaScript returned: {} (type: {})",
+                    result, result != null ? result.getClass().getName() : "null");
+
+            @SuppressWarnings("unchecked")
+            List<Map<String, Object>> elementData = result instanceof List
+                    ? (List<Map<String, Object>>) result
+                    : new ArrayList<>();
+
+            log.debug("[LocatorExtractor] Extracted {} elements from DOM",
+                    elementData.size());
 
             if (elementData == null || elementData.isEmpty()) {
                 log.warn("[LocatorExtractor] ⚠ No interactable elements found on page '{}'. " +
@@ -77,6 +83,11 @@ public class LocatorExtractor {
             for (Map<String, Object> data : elementData) {
                 String elementName = (String) data.get("elementName");
                 String tag = (String) data.get("tag");
+
+                // Filter out elements based on visibility and interactivity
+                if (!shouldIncludeElement(data)) {
+                    continue;
+                }
 
                 // Generate locator strategies for this element
                 List<LocatorEntry> allLocators = generateLocatorStrategies(data);
@@ -260,87 +271,118 @@ public class LocatorExtractor {
     }
 
     /**
+     * Determine if an element should be included based on visibility and interactivity.
+     * Mirrors the filtering logic from DebugLocatorSteps.
+     */
+    private boolean shouldIncludeElement(Map<String, Object> elementData) {
+        String tag = (String) elementData.get("tag");
+        String display = (String) elementData.get("display");
+        String visibility = (String) elementData.get("visibility");
+        String opacity = (String) elementData.get("opacity");
+        String ariaHidden = (String) elementData.get("ariaHidden");
+        String role = (String) elementData.get("role");
+        Boolean onclick = (Boolean) elementData.get("onclick");
+        String id = (String) elementData.get("id");
+        String name = (String) elementData.get("name");
+        String text = (String) elementData.get("text");
+
+        // Skip if display:none
+        if ("none".equalsIgnoreCase(display)) {
+            return false;
+        }
+
+        // Skip if visibility:hidden (only if explicitly set)
+        if ("hidden".equalsIgnoreCase(visibility)) {
+            return false;
+        }
+
+        // Skip if opacity:0 (only if explicitly set)
+        if ("0".equals(opacity)) {
+            return false;
+        }
+
+        // Skip if aria-hidden
+        if ("true".equals(ariaHidden)) {
+            return false;
+        }
+
+        // For DIV/SPAN, check if interactive
+        if ("div".equalsIgnoreCase(tag) || "span".equalsIgnoreCase(tag)) {
+            boolean hasButtonRole = "button".equalsIgnoreCase(role);
+            boolean hasOnclick = onclick != null && onclick;
+            if (!hasButtonRole && !hasOnclick) {
+                return false; // Not interactive
+            }
+        }
+
+        // Check if has identifying info
+        boolean hasId = id != null && !id.isEmpty();
+        boolean hasName = name != null && !name.isEmpty();
+        boolean hasText = text != null && !text.trim().isEmpty();
+        boolean hasRole = role != null && !role.isEmpty();
+
+        if (!hasId && !hasName && !hasText && !hasRole) {
+            return false; // No identifying info
+        }
+
+        return true;
+    }
+
+    /**
      * Get JavaScript to extract all interactable elements from the DOM.
-     * Uses a simplified approach: select by tag, skip only display:none
+     * NO IIFE - returns directly like Selenium/WebDriver expects
      */
     private String getExtractionScript() {
         return """
-            (function() {
-                const elements = [];
-                let count = 0;
+            const elements = [];
+            let elemCount = 0;
+            const tags = ['BUTTON', 'INPUT', 'SELECT', 'TEXTAREA', 'A', 'LABEL', 'FORM', 'DIV', 'SPAN'];
 
-                // Simple, direct selector for all interactive elements
-                const selectors = [
-                    'button',
-                    'input:not([type="hidden"])',
-                    'select',
-                    'textarea',
-                    'a',
-                    'label',
-                    'form',
-                    '[role="button"]',
-                    '[onclick]'
-                ];
+            document.querySelectorAll('*').forEach((el) => {
+                if (!tags.includes(el.tagName)) return;
 
-                // Get all matching elements
-                const selector = selectors.join(', ');
-                const matched = document.querySelectorAll(selector);
+                // Build full element object
+                let count = ++elemCount;
+                let name = el.id || el.name || el.getAttribute('data-testid')
+                    || el.getAttribute('aria-label') || el.getAttribute('placeholder')
+                    || el.getAttribute('value') || (el.textContent || '').trim().substring(0, 30)
+                    || el.tagName.toLowerCase() + '_' + count;
 
-                matched.forEach((el) => {
-                    // Skip only if truly invisible via CSS
-                    try {
-                        const style = window.getComputedStyle(el);
-                        // Only skip if display:none (most common)
-                        if (style.display === 'none') return;
-                        // Skip visibility:hidden only if explicitly set
-                        if (style.visibility === 'hidden' && el.style.visibility === 'hidden') return;
-                        // Skip opacity:0 only if explicitly set
-                        if (style.opacity === '0' && el.style.opacity === '0') return;
-                    } catch (e) {
-                        // If error, include anyway
+                // Sanitize
+                name = name.replace(/[^a-zA-Z0-9_-]/g, '_').substring(0, 50);
+
+                // Calculate indexInParent safely
+                let indexInParent = -1;
+                try {
+                    if (el.parentNode) {
+                        indexInParent = Array.from(el.parentNode.children).indexOf(el);
                     }
+                } catch (e) {
+                    indexInParent = -1;
+                }
 
-                    // Skip aria-hidden
-                    if (el.getAttribute('aria-hidden') === 'true') return;
-
-                    // Skip script/style elements
-                    if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE') return;
-
-                    count++;
-
-                    // Generate element name - try multiple strategies
-                    let name =
-                        el.id
-                        || el.name
-                        || el.getAttribute('data-testid')
-                        || el.getAttribute('aria-label')
-                        || el.getAttribute('placeholder')
-                        || el.getAttribute('value')
-                        || (el.textContent || '').trim().substring(0, 30)
-                        || el.tagName.toLowerCase() + '_' + count;
-
-                    // Sanitize name
-                    name = name
-                        .replace(/[^a-zA-Z0-9_-]/g, '_')
-                        .substring(0, 50);
-
-                    elements.push({
-                        elementName: name,
-                        tag: el.tagName.toLowerCase(),
-                        id: el.id || '',
-                        name: el.name || '',
-                        dataTestId: el.getAttribute('data-testid') || '',
-                        ariaLabel: el.getAttribute('aria-label') || '',
-                        classes: el.className || '',
-                        text: (el.textContent || '').trim().substring(0, 100),
-                        value: el.value || '',
-                        placeholder: el.getAttribute('placeholder') || '',
-                        indexInParent: Array.from(el.parentNode.children).indexOf(el)
-                    });
+                elements.push({
+                    elementName: name,
+                    tag: el.tagName.toLowerCase(),
+                    id: el.id || '',
+                    name: el.name || '',
+                    dataTestId: el.getAttribute('data-testid') || '',
+                    ariaLabel: el.getAttribute('aria-label') || '',
+                    classes: el.className || '',
+                    text: (el.textContent || '').trim().substring(0, 100),
+                    value: el.value || el.getAttribute('value') || '',
+                    placeholder: el.getAttribute('placeholder') || '',
+                    display: window.getComputedStyle(el).display,
+                    visibility: window.getComputedStyle(el).visibility,
+                    opacity: window.getComputedStyle(el).opacity,
+                    ariaHidden: el.getAttribute('aria-hidden'),
+                    role: el.getAttribute('role'),
+                    onclick: !!el.getAttribute('onclick'),
+                    indexInParent: indexInParent
                 });
+            });
 
-                return elements;
-            })();
+            return elements;
             """;
     }
 
