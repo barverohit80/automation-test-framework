@@ -44,3 +44,19 @@ app:
   locators:
     resource-dir: "locators/"
     file-dir: "src/main/resources/locators/"
+
+    # Exclude dynamic/generated elements from locators JSON
+    # Comma-separated regex patterns to exclude dynamic IDs
+    exclude-dynamic-ids: |
+      ^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$,
+      ^[a-f0-9]{32}$,
+      ^[a-f0-9]{16}$,
+      ^[a-z]+-[a-z0-9]{6,}$,
+      ^(__[a-z]+-{1,2}[a-z0-9]+|_[a-z0-9]+)$
+
+    # Minimum confidence score for locators (lower = accept more)
+    min-confidence: 0.3
+
+    # Require at least one stable identifier (id, name, data-testid, aria-label)
+    # If true, elements with only classes/text content are excluded
+    require-stable-identifier: true

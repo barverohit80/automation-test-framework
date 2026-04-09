@@ -1,6 +1,2381 @@
 {
   "pageName" : "PracticeFormPage",
   "pageUrl" : "https://demoqa.com/automation-practice-form",
-  "elements" : [ ],
-  "lastUpdated" : "2026-04-09T10:21:14.911733"
+  "elements" : [ {
+    "elementName" : "Text_Box",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Text Box']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Text Box')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.504391"
+  }, {
+    "elementName" : "Check_Box",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Check Box']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Check Box')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.504524"
+  }, {
+    "elementName" : "Radio_Button",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Radio Button']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Radio Button')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.504622"
+  }, {
+    "elementName" : "Web_Tables",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Web Tables']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Web Tables')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.504702"
+  }, {
+    "elementName" : "Buttons",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Buttons']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Buttons')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.504773"
+  }, {
+    "elementName" : "Links",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Links']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Links')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.504842"
+  }, {
+    "elementName" : "Broken_Links_-_Images",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Broken Links - Images']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Broken Links - Images')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.504907"
+  }, {
+    "elementName" : "Upload_and_Download",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Upload and Download']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Upload and Download')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.504987"
+  }, {
+    "elementName" : "Dynamic_Properties",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Dynamic Properties']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Dynamic Properties')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.50507"
+  }, {
+    "elementName" : "Practice_Form",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Practice Form']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Practice Form')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.505217"
+  }, {
+    "elementName" : "Browser_Windows",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Browser Windows']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Browser Windows')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.505355"
+  }, {
+    "elementName" : "Alerts",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Alerts']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Alerts')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.505496"
+  }, {
+    "elementName" : "Frames",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Frames']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Frames')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.50558"
+  }, {
+    "elementName" : "Nested_Frames",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Nested Frames']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Nested Frames')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.505654"
+  }, {
+    "elementName" : "Modal_Dialogs",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Modal Dialogs']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Modal Dialogs')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.50573"
+  }, {
+    "elementName" : "Accordian",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Accordian']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Accordian')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.505964"
+  }, {
+    "elementName" : "Auto_Complete",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Auto Complete']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Auto Complete')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.506121"
+  }, {
+    "elementName" : "Date_Picker",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Date Picker']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Date Picker')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.506245"
+  }, {
+    "elementName" : "Slider",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Slider']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Slider')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.506386"
+  }, {
+    "elementName" : "Progress_Bar",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Progress Bar']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Progress Bar')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.506553"
+  }, {
+    "elementName" : "Tabs",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Tabs']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Tabs')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.506702"
+  }, {
+    "elementName" : "Tool_Tips",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Tool Tips']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Tool Tips')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.506852"
+  }, {
+    "elementName" : "Menu",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Menu']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Menu')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.50697"
+  }, {
+    "elementName" : "Select_Menu",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Select Menu']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Select Menu')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.507089"
+  }, {
+    "elementName" : "Sortable",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Sortable']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Sortable')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.507324"
+  }, {
+    "elementName" : "Selectable",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Selectable']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Selectable')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.507405"
+  }, {
+    "elementName" : "Resizable",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Resizable']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Resizable')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.507513"
+  }, {
+    "elementName" : "Droppable",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Droppable']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Droppable')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.507584"
+  }, {
+    "elementName" : "Dragabble",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Dragabble']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Dragabble')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.507654"
+  }, {
+    "elementName" : "Login",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Login']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Login')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.507819"
+  }, {
+    "elementName" : "Book_Store",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Book Store']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Book Store')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.507895"
+  }, {
+    "elementName" : "Profile",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Profile']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Profile')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.507965"
+  }, {
+    "elementName" : "Book_Store_API",
+    "primary" : {
+      "type" : "css",
+      "value" : ".router-link",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//a[text()='Book Store API']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[contains(text(), 'Book Store API')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//a)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//a[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "a",
+    "lastCaptured" : "2026-04-09T10:52:38.508035"
+  }, {
+    "elementName" : "userForm",
+    "primary" : {
+      "type" : "id",
+      "value" : "userForm",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//form[3]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//form)[3]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//form[3]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "form",
+    "lastCaptured" : "2026-04-09T10:52:38.508099"
+  }, {
+    "elementName" : "userName-label",
+    "primary" : {
+      "type" : "id",
+      "value" : "userName-label",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-label.col-form-label.col-form-label-sm.col",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[text()='Name']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Name')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.508186"
+  }, {
+    "elementName" : "firstName",
+    "primary" : {
+      "type" : "id",
+      "value" : "firstName",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : "..mr-sm-2.form-control",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[@placeholder='First Name']",
+      "confidence" : 0.7,
+      "description" : "Placeholder attribute match"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.508283"
+  }, {
+    "elementName" : "lastName",
+    "primary" : {
+      "type" : "id",
+      "value" : "lastName",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : "..mr-sm-2.form-control",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[@placeholder='Last Name']",
+      "confidence" : 0.7,
+      "description" : "Placeholder attribute match"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.508387"
+  }, {
+    "elementName" : "userEmail-label",
+    "primary" : {
+      "type" : "id",
+      "value" : "userEmail-label",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-label.col-form-label.col-form-label-sm.col",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[text()='Email']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Email')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.50847"
+  }, {
+    "elementName" : "userEmail",
+    "primary" : {
+      "type" : "id",
+      "value" : "userEmail",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".mr-sm-2.form-control",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[@placeholder='name@example.com']",
+      "confidence" : 0.7,
+      "description" : "Placeholder attribute match"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.508562"
+  }, {
+    "elementName" : "gender-radio-1",
+    "primary" : {
+      "type" : "id",
+      "value" : "gender-radio-1",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "name",
+      "value" : "gender",
+      "confidence" : 0.9,
+      "description" : "Name attribute on form element"
+    }, {
+      "type" : "css",
+      "value" : ".form-check-input",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[@value='Male']",
+      "confidence" : 0.75,
+      "description" : "Value attribute match"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.508702"
+  }, {
+    "elementName" : "Male",
+    "primary" : {
+      "type" : "css",
+      "value" : ".form-check-label",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//label[text()='Male']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Male')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[2]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[2]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[2]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.508774"
+  }, {
+    "elementName" : "gender-radio-2",
+    "primary" : {
+      "type" : "id",
+      "value" : "gender-radio-2",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "name",
+      "value" : "gender",
+      "confidence" : 0.9,
+      "description" : "Name attribute on form element"
+    }, {
+      "type" : "css",
+      "value" : ".form-check-input",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[@value='Female']",
+      "confidence" : 0.75,
+      "description" : "Value attribute match"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.508851"
+  }, {
+    "elementName" : "Female",
+    "primary" : {
+      "type" : "css",
+      "value" : ".form-check-label",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//label[text()='Female']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Female')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[2]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[2]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[2]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.508916"
+  }, {
+    "elementName" : "gender-radio-3",
+    "primary" : {
+      "type" : "id",
+      "value" : "gender-radio-3",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "name",
+      "value" : "gender",
+      "confidence" : 0.9,
+      "description" : "Name attribute on form element"
+    }, {
+      "type" : "css",
+      "value" : ".form-check-input",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[@value='Other']",
+      "confidence" : 0.75,
+      "description" : "Value attribute match"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.508988"
+  }, {
+    "elementName" : "Other",
+    "primary" : {
+      "type" : "css",
+      "value" : ".form-check-label",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//label[text()='Other']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Other')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[2]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[2]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[2]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.509067"
+  }, {
+    "elementName" : "userNumber-label",
+    "primary" : {
+      "type" : "id",
+      "value" : "userNumber-label",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-label.col-form-label.col-form-label-sm.col",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[text()='Mobile(10 Digits)']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Mobile(10 Digits)')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.509156"
+  }, {
+    "elementName" : "userNumber",
+    "primary" : {
+      "type" : "id",
+      "value" : "userNumber",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : "..mr-sm-2.form-control",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[@placeholder='Mobile Number']",
+      "confidence" : 0.7,
+      "description" : "Placeholder attribute match"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.509286"
+  }, {
+    "elementName" : "dateOfBirth-label",
+    "primary" : {
+      "type" : "id",
+      "value" : "dateOfBirth-label",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-label.col-form-label.col-form-label-sm.col",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[text()='Date of Birth']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Date of Birth')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.509403"
+  }, {
+    "elementName" : "dateOfBirthInput",
+    "primary" : {
+      "type" : "id",
+      "value" : "dateOfBirthInput",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-control",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[@value='09 Apr 2026']",
+      "confidence" : 0.75,
+      "description" : "Value attribute match"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.509542"
+  }, {
+    "elementName" : "subjects-label",
+    "primary" : {
+      "type" : "id",
+      "value" : "subjects-label",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-label.col-form-label.col-form-label-sm.col",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[text()='Subjects']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Subjects')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.509717"
+  }, {
+    "elementName" : "subjectsInput",
+    "primary" : {
+      "type" : "id",
+      "value" : "subjectsInput",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".subjects-auto-complete__input",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.509964"
+  }, {
+    "elementName" : "subjects-label",
+    "primary" : {
+      "type" : "id",
+      "value" : "subjects-label",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-label.col-form-label.col-form-label-sm.col",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[text()='Hobbies']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Hobbies')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.510107"
+  }, {
+    "elementName" : "hobbies-checkbox-1",
+    "primary" : {
+      "type" : "id",
+      "value" : "hobbies-checkbox-1",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-check-input",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[@value='1']",
+      "confidence" : 0.75,
+      "description" : "Value attribute match"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.510185"
+  }, {
+    "elementName" : "Sports",
+    "primary" : {
+      "type" : "css",
+      "value" : ".form-check-label",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//label[text()='Sports']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Sports')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[2]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[2]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[2]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.510248"
+  }, {
+    "elementName" : "hobbies-checkbox-2",
+    "primary" : {
+      "type" : "id",
+      "value" : "hobbies-checkbox-2",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-check-input",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[@value='2']",
+      "confidence" : 0.75,
+      "description" : "Value attribute match"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.510319"
+  }, {
+    "elementName" : "Reading",
+    "primary" : {
+      "type" : "css",
+      "value" : ".form-check-label",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//label[text()='Reading']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Reading')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[2]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[2]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[2]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.510385"
+  }, {
+    "elementName" : "hobbies-checkbox-3",
+    "primary" : {
+      "type" : "id",
+      "value" : "hobbies-checkbox-3",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-check-input",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[@value='3']",
+      "confidence" : 0.75,
+      "description" : "Value attribute match"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.51046"
+  }, {
+    "elementName" : "Music",
+    "primary" : {
+      "type" : "css",
+      "value" : ".form-check-label",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//label[text()='Music']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Music')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[2]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[2]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[2]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.510735"
+  }, {
+    "elementName" : "subjects-label",
+    "primary" : {
+      "type" : "id",
+      "value" : "subjects-label",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-label.col-form-label.col-form-label-sm.col",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[text()='Picture']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Picture')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.510843"
+  }, {
+    "elementName" : "uploadPicture",
+    "primary" : {
+      "type" : "id",
+      "value" : "uploadPicture",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-control",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.511087"
+  }, {
+    "elementName" : "currentAddress-label",
+    "primary" : {
+      "type" : "id",
+      "value" : "currentAddress-label",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-label.col-form-label.col-form-label-sm.col",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[text()='Current Address']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'Current Address')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.511257"
+  }, {
+    "elementName" : "currentAddress",
+    "primary" : {
+      "type" : "id",
+      "value" : "currentAddress",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-control",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//textarea[@placeholder='Current Address']",
+      "confidence" : 0.7,
+      "description" : "Placeholder attribute match"
+    }, {
+      "type" : "xpath",
+      "value" : "//textarea[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//textarea)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//textarea[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "textarea",
+    "lastCaptured" : "2026-04-09T10:52:38.511381"
+  }, {
+    "elementName" : "stateCity-label",
+    "primary" : {
+      "type" : "id",
+      "value" : "stateCity-label",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".form-label.col-form-label.col-form-label-sm.col",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[text()='State and City']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[contains(text(), 'State and City')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//label)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//label[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "label",
+    "lastCaptured" : "2026-04-09T10:52:38.511473"
+  }, {
+    "elementName" : "react-select-3-input",
+    "primary" : {
+      "type" : "id",
+      "value" : "react-select-3-input",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//input)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//input[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "input",
+    "lastCaptured" : "2026-04-09T10:52:38.511593"
+  }, {
+    "elementName" : "submit",
+    "primary" : {
+      "type" : "id",
+      "value" : "submit",
+      "confidence" : 0.95,
+      "description" : "Unique ID attribute"
+    },
+    "fallbacks" : [ {
+      "type" : "css",
+      "value" : ".btn.btn-primary",
+      "confidence" : 0.8,
+      "description" : "CSS class combination"
+    }, {
+      "type" : "xpath",
+      "value" : "//button[text()='Submit']",
+      "confidence" : 0.65,
+      "description" : "Exact text content match"
+    }, {
+      "type" : "xpath",
+      "value" : "//button[contains(text(), 'Submit')]",
+      "confidence" : 0.6,
+      "description" : "Text content contains"
+    }, {
+      "type" : "xpath",
+      "value" : "//button[1]",
+      "confidence" : 0.5,
+      "description" : "Element index in parent"
+    }, {
+      "type" : "xpath",
+      "value" : "(//button)[1]",
+      "confidence" : 0.3,
+      "description" : "Positional XPath by tag"
+    }, {
+      "type" : "xpath",
+      "value" : "//button[1]",
+      "confidence" : 0.2,
+      "description" : "Full absolute XPath (fragile)"
+    } ],
+    "tag" : "button",
+    "lastCaptured" : "2026-04-09T10:52:38.511854"
+  } ],
+  "lastUpdated" : "2026-04-09T10:52:38.207989"
 }

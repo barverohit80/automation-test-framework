@@ -6,11 +6,13 @@ import com.automation.locator.model.PageLocators;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -39,6 +41,44 @@ import java.util.stream.Collectors;
 public class LocatorExtractor {
 
     private static final DateTimeFormatter TIMESTAMP_FORMAT = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+    @Value("${app.locators.exclude-dynamic-ids:}")
+    private String excludeDynamicIds;
+
+    @Value("${app.locators.min-confidence:0.3}")
+    private double minConfidence;
+
+    @Value("${app.locators.require-stable-identifier:true}")
+    private boolean requireStableIdentifier;
+
+    private List<Pattern> compiledPatterns = new ArrayList<>();
+
+    /**
+     * Initialize compiled patterns for dynamic element detection.
+     */
+    public void initializePatterns() {
+        if (compiledPatterns.isEmpty()) {
+            if (excludeDynamicIds != null && !excludeDynamicIds.trim().isEmpty()) {
+                String[] patterns = excludeDynamicIds.split(",");
+                compiledPatterns = new ArrayList<>();
+                for (String pattern : patterns) {
+                    String trimmed = pattern.trim();
+                    if (!trimmed.isEmpty()) {
+                        try {
+                            compiledPatterns.add(Pattern.compile(trimmed));
+                        } catch (Exception e) {
+                            log.warn("[LocatorExtractor] Invalid regex pattern: {}", trimmed);
+                        }
+                    }
+                }
+                if (!compiledPatterns.isEmpty()) {
+                    log.info("[LocatorExtractor] ✓ Loaded {} exclusion patterns for dynamic elements", compiledPatterns.size());
+                }
+            } else {
+                log.info("[LocatorExtractor] No exclusion patterns configured. Accepting all elements.");
+            }
+        }
+    }
 
     /**
      * Extract locators from the current page.
@@ -271,10 +311,77 @@ public class LocatorExtractor {
     }
 
     /**
+     * Check if element has a dynamically generated ID/name (UUID, hash, etc.)
+     */
+    private boolean isDynamicallyGenerated(Map<String, Object> elementData) {
+        initializePatterns();
+
+        if (compiledPatterns.isEmpty()) {
+            return false; // No patterns configured, accept all
+        }
+
+        String id = (String) elementData.get("id");
+        String name = (String) elementData.get("name");
+        String classes = (String) elementData.get("classes");
+
+        // Check ID against patterns
+        if (id != null && !id.isEmpty()) {
+            for (Pattern pattern : compiledPatterns) {
+                if (pattern.matcher(id).matches()) {
+                    log.debug("[LocatorExtractor] Excluding element with dynamic ID: {}", id);
+                    return true;
+                }
+            }
+        }
+
+        // Check name against patterns
+        if (name != null && !name.isEmpty()) {
+            for (Pattern pattern : compiledPatterns) {
+                if (pattern.matcher(name).matches()) {
+                    log.debug("[LocatorExtractor] Excluding element with dynamic name: {}", name);
+                    return true;
+                }
+            }
+        }
+
+        // Check if only has dynamic classes (no stable identifiers)
+        if (requireStableIdentifier && (id == null || id.isEmpty()) && (name == null || name.isEmpty())) {
+            String dataTestId = (String) elementData.get("dataTestId");
+            String ariaLabel = (String) elementData.get("ariaLabel");
+            String text = (String) elementData.get("text");
+
+            // If only has classes/text and classes look dynamic, exclude it
+            if ((dataTestId == null || dataTestId.isEmpty()) &&
+                (ariaLabel == null || ariaLabel.isEmpty()) &&
+                (classes != null && !classes.isEmpty()) &&
+                (text == null || text.trim().isEmpty())) {
+
+                // Check if classes match exclusion patterns
+                for (Pattern pattern : compiledPatterns) {
+                    String[] classArray = classes.split("\\s+");
+                    for (String cls : classArray) {
+                        if (pattern.matcher(cls).matches()) {
+                            log.debug("[LocatorExtractor] Excluding element with dynamic class: {}", cls);
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Determine if an element should be included based on visibility and interactivity.
      * Mirrors the filtering logic from DebugLocatorSteps.
      */
     private boolean shouldIncludeElement(Map<String, Object> elementData) {
+        // First check: skip dynamically generated elements
+        if (isDynamicallyGenerated(elementData)) {
+            return false;
+        }
+
         String tag = (String) elementData.get("tag");
         String display = (String) elementData.get("display");
         String visibility = (String) elementData.get("visibility");
