@@ -41,8 +41,9 @@ public class LocatorSteps {
         log.info("[LocatorGeneration] Generating locators for page: {}", pageName);
 
         try {
-            // Wait for page to be fully loaded
-            Thread.sleep(2000);
+            // Wait for page to be fully loaded (increased from 2s to 3s for dynamic pages)
+            log.info("[LocatorGeneration] Waiting 3 seconds for page to fully load...");
+            Thread.sleep(3000);
 
             // Get current page URL and driver
             String pageUrl = driverFactory.getDriver().getCurrentUrl();
@@ -51,6 +52,9 @@ public class LocatorSteps {
             // Log page title for debugging
             String pageTitle = driverFactory.getDriver().getTitle();
             log.info("[LocatorGeneration] Page title: {}", pageTitle);
+
+            // Check if page is ready (additional wait if needed)
+            checkPageReadiness();
 
             // Extract all interactable elements from DOM
             var pageLocators = locatorExtractor.extract(
@@ -65,15 +69,52 @@ public class LocatorSteps {
             int elementCount = pageLocators.getElements().size();
             if (elementCount > 0) {
                 log.info("[LocatorGeneration] ✓ Saved {} elements to {}.json", elementCount, pageName);
+                log.info("[LocatorGeneration] Elements: {}",
+                    pageLocators.getElements().stream()
+                        .map(e -> e.getElementName() + "(" + e.getTag() + ")")
+                        .limit(5)
+                        .reduce((a, b) -> a + ", " + b)
+                        .orElse("none"));
             } else {
-                log.warn("[LocatorGeneration] ⚠ No elements extracted for page '{}'. " +
-                        "Check if page is fully loaded or if DOM selectors need adjustment.", pageName);
+                log.warn("[LocatorGeneration] ⚠ NO elements extracted for page '{}'.", pageName);
+                log.warn("[LocatorGeneration] Troubleshooting:");
+                log.warn("[LocatorGeneration] 1. Run step: print DOM diagnostic report");
+                log.warn("[LocatorGeneration] 2. Check if page loads buttons, inputs, links, etc.");
+                log.warn("[LocatorGeneration] 3. Check if elements are hidden (display:none, opacity:0)");
+                log.warn("[LocatorGeneration] 4. Increase wait time if page is slow to load");
+                log.warn("[LocatorGeneration] See LOCATOR_DEBUG_GUIDE.md for full debugging steps");
             }
 
         } catch (Exception e) {
             log.error("[LocatorGeneration] ✗ Failed to generate locators for page '{}': {}",
                     pageName, e.getMessage(), e);
             throw new RuntimeException("Failed to generate locators for page: " + pageName, e);
+        }
+    }
+
+    /**
+     * Check if page is fully ready by waiting for common readiness indicators.
+     */
+    private void checkPageReadiness() {
+        try {
+            org.openqa.selenium.JavascriptExecutor js =
+                (org.openqa.selenium.JavascriptExecutor) driverFactory.getDriver();
+            var result = js.executeScript("""
+                return {
+                    documentReady: document.readyState,
+                    bodyExists: !!document.body,
+                    jqueryReady: typeof jQuery !== 'undefined' ? true : false,
+                    domContentLoaded: document.readyState === 'complete' || document.readyState === 'interactive'
+                };
+                """);
+
+            if (result instanceof java.util.Map) {
+                @SuppressWarnings("unchecked")
+                java.util.Map<String, Object> status = (java.util.Map<String, Object>) result;
+                log.debug("[LocatorGeneration] Page readiness: {}", status);
+            }
+        } catch (Exception e) {
+            log.debug("[LocatorGeneration] Could not check page readiness: {}", e.getMessage());
         }
     }
 
