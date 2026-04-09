@@ -2,9 +2,10 @@
 Feature: DemoQA Practice Form
   As a user I want to fill and submit the student registration form
 
-  @smoke
+  @smoke @generate
   Scenario: Submit practice form with required fields
     Given the user is on the practice form page
+    Then generate locators for page "PracticeFormPage"
     When the user fills in the practice form with first name "Rohit" last name "Barve" email "rohit@test.com" gender "Male" mobile "1234567890"
     And the user selects hobby "Sports"
     And the user enters form address "Mumbai, India"

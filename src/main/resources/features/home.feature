@@ -2,10 +2,11 @@
 Feature: DemoQA Home Page
   As a user I want to verify the home page displays all category cards
 
-  @smoke1 @generate
+  @smoke @generate
   Scenario: Home page displays all 6 category cards
     Given the user is on the home page
-    Then the home page should be displayed
+    Then generate locators for page "HomePage"
+    And the home page should be displayed
     And the home page should display 6 category cards
 
   @smoke
