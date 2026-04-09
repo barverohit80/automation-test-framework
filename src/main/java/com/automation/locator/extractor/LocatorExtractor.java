@@ -261,87 +261,69 @@ public class LocatorExtractor {
 
     /**
      * Get JavaScript to extract all interactable elements from the DOM.
-     * More comprehensive to handle different page structures and frameworks.
+     * Uses a simplified approach: select by tag, skip only display:none
      */
     private String getExtractionScript() {
         return """
             (function() {
-                // Extended set of interactive element tags
-                const INTERACTABLE_TAGS = [
-                    'BUTTON', 'INPUT', 'SELECT', 'TEXTAREA', 'A', 'LABEL', 'FORM',
-                    'DIV', 'SPAN'  // Include divs and spans that might be interactive
+                const elements = [];
+                let count = 0;
+
+                // Simple, direct selector for all interactive elements
+                const selectors = [
+                    'button',
+                    'input:not([type="hidden"])',
+                    'select',
+                    'textarea',
+                    'a',
+                    'label',
+                    'form',
+                    '[role="button"]',
+                    '[onclick]'
                 ];
 
-                // Elements that are definitely NOT interactive
-                const NON_INTERACTIVE = ['SCRIPT', 'STYLE', 'META', 'TITLE', 'HEAD', 'HTML'];
+                // Get all matching elements
+                const selector = selectors.join(', ');
+                const matched = document.querySelectorAll(selector);
 
-                const elements = [];
-                let elementCount = 0;
-
-                document.querySelectorAll('*').forEach((el, index) => {
-                    // Skip non-interactive elements
-                    if (NON_INTERACTIVE.includes(el.tagName)) return;
-
-                    // For DIV and SPAN, only include if they might be interactive
-                    if ((el.tagName === 'DIV' || el.tagName === 'SPAN')) {
-                        const role = el.getAttribute('role');
-                        const onclick = el.getAttribute('onclick');
-                        const isClickable = role === 'button' || onclick;
-                        if (!isClickable) return;
-                    } else if (!INTERACTABLE_TAGS.includes(el.tagName)) {
-                        // Skip other non-matching tags
-                        return;
-                    }
-
-                    // Check visibility more carefully
+                matched.forEach((el) => {
+                    // Skip only if truly invisible via CSS
                     try {
                         const style = window.getComputedStyle(el);
-
-                        // Skip if completely invisible
+                        // Only skip if display:none (most common)
                         if (style.display === 'none') return;
-                        if (style.visibility === 'hidden') return;
-                        if (style.opacity === '0') return;
-
-                        // Skip aria-hidden
-                        if (el.getAttribute('aria-hidden') === 'true') return;
-
-                        // For elements with display none in style attribute
-                        if (el.style.display === 'none') return;
-
+                        // Skip visibility:hidden only if explicitly set
+                        if (style.visibility === 'hidden' && el.style.visibility === 'hidden') return;
+                        // Skip opacity:0 only if explicitly set
+                        if (style.opacity === '0' && el.style.opacity === '0') return;
                     } catch (e) {
-                        // If error getting style, include element anyway (might be dynamic)
+                        // If error, include anyway
                     }
 
-                    // Skip elements with no meaningful content or attributes
-                    const hasId = !!el.id;
-                    const hasName = !!el.name;
-                    const hasTestId = !!el.getAttribute('data-testid');
-                    const hasText = (el.textContent || '').trim().length > 0;
-                    const hasAriaLabel = !!el.getAttribute('aria-label');
-                    const hasPlaceholder = !!el.getAttribute('placeholder');
-                    const hasValue = !!el.value;
-                    const isButton = el.tagName === 'BUTTON';
-                    const isInput = el.tagName === 'INPUT';
+                    // Skip aria-hidden
+                    if (el.getAttribute('aria-hidden') === 'true') return;
 
-                    // Include if has any identifying attribute
-                    if (!hasId && !hasName && !hasTestId && !hasText && !hasAriaLabel
-                        && !hasPlaceholder && !hasValue && !isButton && !isInput) {
-                        return;  // Skip elements with no identifying info
-                    }
+                    // Skip script/style elements
+                    if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE') return;
 
-                    // Generate element name with better fallback strategy
-                    let name = el.id
+                    count++;
+
+                    // Generate element name - try multiple strategies
+                    let name =
+                        el.id
                         || el.name
                         || el.getAttribute('data-testid')
                         || el.getAttribute('aria-label')
                         || el.getAttribute('placeholder')
-                        || (el.textContent || '').trim().substring(0, 20)
                         || el.getAttribute('value')
-                        || el.tagName.toLowerCase() + '_' + elementCount;
+                        || (el.textContent || '').trim().substring(0, 30)
+                        || el.tagName.toLowerCase() + '_' + count;
 
-                    name = name.replace(/[^a-zA-Z0-9_]/g, '_').substring(0, 50);
+                    // Sanitize name
+                    name = name
+                        .replace(/[^a-zA-Z0-9_-]/g, '_')
+                        .substring(0, 50);
 
-                    elementCount++;
                     elements.push({
                         elementName: name,
                         tag: el.tagName.toLowerCase(),
@@ -350,7 +332,7 @@ public class LocatorExtractor {
                         dataTestId: el.getAttribute('data-testid') || '',
                         ariaLabel: el.getAttribute('aria-label') || '',
                         classes: el.className || '',
-                        text: el.textContent ? el.textContent.trim().substring(0, 100) : '',
+                        text: (el.textContent || '').trim().substring(0, 100),
                         value: el.value || '',
                         placeholder: el.getAttribute('placeholder') || '',
                         indexInParent: Array.from(el.parentNode.children).indexOf(el)
