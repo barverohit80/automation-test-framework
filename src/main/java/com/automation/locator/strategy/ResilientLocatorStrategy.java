@@ -13,6 +13,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -37,6 +38,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
+@Scope("cucumber-glue")
 public class ResilientLocatorStrategy {
 
     @Autowired private DriverFactory driverFactory;
