@@ -220,6 +220,35 @@ def process_and_plot_signals(hs_code, target_ticker, alert_threshold=10.0):
         return {"sector": TRADE_TO_STOCK_MAP[hs_code]['sector'], "ticker": target_ticker, "status": f"Error: {e}"}
 
 
+# TELEGRAM CONFIGURATION
+TELEGRAM_TOKEN = "8697229689:AAG5KT06bio6I2adEQ--rKicOcsXtPFxWYc"
+TELEGRAM_CHAT_ID = "-1003824534754"
+
+def send_macro_telegram_report(results, log_file):
+    """Sends the monthly macro summary and historical context to Telegram."""
+    timestamp = datetime.now().strftime("%Y-%m-%d")
+    
+    # 1. Latest Report
+    report_msg = f"📊 <b>Monthly Macro Report ({timestamp})</b>\n\n"
+    report_msg += "<b>Top Sector Verdicts:</b>\n"
+    
+    # Sort results to show Strong Buys first
+    sorted_res = sorted([r for r in results if r['status'] == "Success"], key=lambda x: x['growth'], reverse=True)
+    
+    for r in sorted_res[:5]: # Show top 5
+        icon = "🚀" if r['signal'] else "🕒"
+        report_msg += f"{icon} {r['sector']}: {r['growth']:+.1f}%\n"
+
+    # 2. Historical Context (Last 10 changes)
+    if os.path.exists(log_file):
+        hist_df = pd.read_csv(log_file).tail(10)
+        report_msg += "\n📜 <b>Last 10 Macro Signals:</b>\n"
+        for _, h_row in hist_df.iterrows():
+            report_msg += f"• {h_row['Ticker']}: {h_row['Growth_QoQ']:+.1f}% ({h_row['Verdict']})\n"
+
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "text": report_msg, "parse_mode": "HTML"})
+
 # =====================================================================
 # 3. SCRIPT EXECUTION ENTRY POINT
 # =====================================================================
@@ -228,6 +257,10 @@ if __name__ == "__main__":
     print(" LAUNCHING US EXPORT -> INDIAN EQUITIES TRACKING SYSTEM ")
     print("===============================================================")
     
+    # Initial heartbeat
+    requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage", 
+                  data={"chat_id": TELEGRAM_CHAT_ID, "text": "🔍 <b>Monthly Macro Scan Started...</b>", "parse_mode": "HTML"})
+
     results = []
     
     for hs_code, info in TRADE_TO_STOCK_MAP.items():
@@ -273,6 +306,9 @@ if __name__ == "__main__":
         else:
             log_df.to_csv(log_file, mode='a', header=False, index=False)
         print(f"\n✅ Historical trends updated in: {os.path.abspath(log_file)}")
+        
+        # SEND TELEGRAM REPORT
+        send_macro_telegram_report(results, log_file)
             
     print("-" * 60)
     print(f"Charts saved in: {os.path.abspath('reports/')}")
