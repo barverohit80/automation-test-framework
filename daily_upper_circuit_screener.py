@@ -91,7 +91,7 @@ def run_screener():
             
             mcap = get_market_cap_in_cr(nse_symbol)
             
-            if mcap >= 1000:
+            if mcap >= 500:
                 print(f"-> Qualified: {symbol} (M-Cap: ₹{mcap:,.0f} Cr)")
                 
                 reason = get_latest_news_headline(symbol)
