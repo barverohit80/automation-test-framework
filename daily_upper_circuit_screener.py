@@ -141,3 +141,4 @@ def run_screener():
 
 if __name__ == "__main__":
     run_screener()
+# Manual trigger: Mon May 25 23:44:27 IST 2026
