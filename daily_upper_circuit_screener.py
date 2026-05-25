@@ -85,39 +85,39 @@ def run_screener():
 
         if upper_circuits_df.empty:
             print("No stocks hit the upper circuit today.")
-            return
-
-        print(f"Found {len(upper_circuits_df)} stocks at upper circuit. Filtering by Market Cap...")
-        
-        results = []
-        for index, row in upper_circuits_df.iterrows():
-            symbol = row['symbol']
-            nse_symbol = f"{symbol}.NS"
+            results = []
+        else:
+            print(f"Found {len(upper_circuits_df)} stocks at upper circuit. Filtering by Market Cap...")
             
-            mcap = get_market_cap_in_cr(nse_symbol)
-            
-            if mcap >= 500:
-                print(f"-> Qualified: {symbol} (M-Cap: ₹{mcap:,.0f} Cr)")
+            results = []
+            for index, row in upper_circuits_df.iterrows():
+                symbol = row['symbol']
+                nse_symbol = f"{symbol}.NS"
                 
-                reason = get_latest_news_headline(symbol)
+                mcap = get_market_cap_in_cr(nse_symbol)
                 
-                # SEND TELEGRAM ALERT
-                send_telegram_alert(symbol, mcap, row['ltp'], reason)
-                
-                results.append({
-                    "Symbol": symbol,
-                    "LTP": row['ltp'],
-                    "Change%": f"{row['pChange']}%",
-                    "Market Cap (Cr)": f"₹{mcap:,.0f}",
-                    "Catalyst/Reason": reason
-                })
-                time.sleep(1)
+                if mcap >= 500:
+                    print(f"-> Qualified: {symbol} (M-Cap: ₹{mcap:,.0f} Cr)")
+                    
+                    reason = get_latest_news_headline(symbol)
+                    
+                    # SEND TELEGRAM ALERT
+                    send_telegram_alert(symbol, mcap, row['ltp'], reason)
+                    
+                    results.append({
+                        "Symbol": symbol,
+                        "LTP": row['ltp'],
+                        "Change%": f"{row['pChange']}%",
+                        "Market Cap (Cr)": f"₹{mcap:,.0f}",
+                        "Catalyst/Reason": reason
+                    })
+                    time.sleep(1)
 
         # 4. Final Report
         if results:
             df_report = pd.DataFrame(results)
             print("\n" + "="*80)
-            header_text = "TODAY'S UPPER CIRCUIT LEADERS (> ₹1000 Cr)"
+            header_text = "TODAY'S UPPER CIRCUIT LEADERS (> ₹500 Cr)"
             print(f"{header_text:^80}")
             print("="*80)
             print(df_report.to_string(index=False))
@@ -125,8 +125,8 @@ def run_screener():
             
             # Save to log
             log_file = "daily_circuit_log.csv"
-            timestamp = datetime.now().strftime("%Y-%m-%d")
-            df_report['Date'] = timestamp
+            log_timestamp = datetime.now().strftime("%Y-%m-%d")
+            df_report['Date'] = log_timestamp
             
             if not os.path.exists(log_file):
                 df_report.to_csv(log_file, index=False)
@@ -134,11 +134,17 @@ def run_screener():
                 df_report.to_csv(log_file, mode='a', header=False, index=False)
             print(f"\nReport saved to: {os.path.abspath(log_file)}")
         else:
-            print("\nNo stocks above ₹1000 Cr hit the upper circuit today.")
+            print("\nNo stocks above ₹500 Cr hit the upper circuit today.")
+
+        # Final completion message
+        end_time = datetime.now().strftime("%Y-%m-%d %H:%M")
+        finish_msg = f"✅ <b>Screener Finished</b>\nEnd time: {end_time} IST\nStocks Identified: {len(results)}"
+        requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "text": finish_msg, "parse_mode": "HTML"})
 
     except Exception as e:
         print(f"An error occurred: {e}")
+        error_msg = f"❌ <b>Screener Error</b>\n{str(e)}"
+        requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "text": error_msg, "parse_mode": "HTML"})
 
 if __name__ == "__main__":
     run_screener()
-# Manual trigger: Mon May 25 23:44:27 IST 2026
