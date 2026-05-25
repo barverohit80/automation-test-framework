@@ -59,9 +59,14 @@ def send_telegram_alert(symbol, mcap, price, reason):
 
 def run_screener():
     print("===============================================================")
-    print("      DAILY NSE UPPER CIRCUIT SCREENER (> 1000 CR) ")
+    print("      DAILY NSE UPPER CIRCUIT SCREENER (> 500 CR) ")
     print("===============================================================")
     print("Fetching data from NSE... (this may take a minute)")
+    
+    # Heartbeat message to confirm bot is working
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "text": f"🔍 <b>Screener Active</b>\nRun started at {timestamp} IST", "parse_mode": "HTML"})
     
     try:
         # 1. Fetch Price Band Hitters from NSE
