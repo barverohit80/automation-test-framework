@@ -26,3 +26,11 @@ jobs:
 
     - name: Run Screener
       run: python daily_upper_circuit_screener.py
+
+    - name: Commit and Push History
+      run: |
+        git config --global user.name "GitHub Action Bot"
+        git config --global user.email "actions@github.com"
+        git add daily_circuit_log.csv
+        git commit -m "Update daily circuit history [skip ci]" || echo "No changes to commit"
+        git push origin main
