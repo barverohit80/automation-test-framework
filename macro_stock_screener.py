@@ -114,18 +114,32 @@ def process_and_plot_signals(hs_code, target_ticker, alert_threshold=10.0):
         stock_monthly = stock_df['Close'].resample('ME').last().reset_index()
         stock_monthly['YearMonth'] = stock_monthly['Date'].dt.tz_localize(None).dt.to_period('M')
         merged = pd.merge(trade_df, stock_monthly, on='YearMonth', suffixes=('_trade', '_stock'))
-        if merged.shape[0] < 4: return {"sector": sector_info['sector'], "ticker": target_ticker, "status": "Error: Data Gap"}
-        latest_avg = merged['Import_Value_USD_Smoothed'].iloc[-1]
-        prev_avg = merged['Import_Value_USD_Smoothed'].iloc[-4]
-        recent_growth = ((latest_avg - prev_avg) / prev_avg) * 100
+        
+        if merged.shape[0] < 10: return {"sector": sector_info['sector'], "ticker": target_ticker, "status": "Error: Insufficient History"}
+
+        # Calculate 3-Quarter Trend
+        def get_q_growth(idx_end, idx_start):
+            v_end = merged['Import_Value_USD_Smoothed'].iloc[idx_end]
+            v_start = merged['Import_Value_USD_Smoothed'].iloc[idx_start]
+            return ((v_end - v_start) / v_start) * 100
+
+        q1_growth = get_q_growth(-1, -4)
+        q2_growth = get_q_growth(-4, -7)
+        q3_growth = get_q_growth(-7, -10)
+        
         fig, ax1 = plt.subplots(figsize=(12, 6))
         ax1.plot(merged['Date_trade'], merged['Import_Value_USD_Smoothed'], color='navy', linewidth=3)
         ax2 = ax1.twinx()
         ax2.plot(merged['Date_trade'], merged['Close'], color='forestgreen', linewidth=2, linestyle='--')
-        plt.title(f"{sector_info['sector']} ({target_ticker}) | Growth: {recent_growth:+.1f}%")
+        plt.title(f"{sector_info['sector']} ({target_ticker}) | Trend: {q3_growth:+.0f}% -> {q2_growth:+.0f}% -> {q1_growth:+.0f}%")
         filename = f"{report_dir}/{sector_info['sector'].replace(' ', '_')}_{target_ticker}.png"
         plt.savefig(filename); plt.close()
-        return {"sector": sector_info['sector'], "ticker": target_ticker, "growth": recent_growth, "signal": recent_growth >= alert_threshold, "chart": filename, "status": "Success"}
+        
+        return {
+            "sector": sector_info['sector'], "ticker": target_ticker, 
+            "growth": q1_growth, "q2_growth": q2_growth, "q3_growth": q3_growth,
+            "signal": q1_growth >= alert_threshold, "chart": filename, "status": "Success"
+        }
     except Exception as e: return {"sector": sector_info['sector'], "ticker": target_ticker, "status": f"Error: {e}"}
 
 def create_visual_report_table(results):
@@ -134,18 +148,20 @@ def create_visual_report_table(results):
         if r['status'] == "Success":
             verdict = "STRONG BUY" if r['signal'] else "WATCHLIST"
             us_cust = TRADE_TO_STOCK_MAP.get(next(k for k, v in TRADE_TO_STOCK_MAP.items() if v['sector'] == r['sector']), {}).get('us_customer', 'N/A')
-            data.append([r['sector'], r['ticker'], f"{r['growth']:+.1f}%", us_cust, verdict])
+            data.append([r['sector'], r['ticker'], f"{r['q3_growth']:+.1f}%", f"{r['q2_growth']:+.1f}%", f"{r['growth']:+.1f}%", us_cust, verdict])
+
     if not data: return None
-    df = pd.DataFrame(data, columns=['Sector', 'Ticker', 'Growth', 'US Customer', 'Verdict'])
-    fig, ax = plt.subplots(figsize=(14, len(data)*0.6 + 2))
+    df = pd.DataFrame(data, columns=['Sector', 'Ticker', 'Prev Q2', 'Prev Q1', 'Current Q', 'US Customer', 'Verdict'])
+    fig, ax = plt.subplots(figsize=(16, len(data)*0.6 + 2))
     ax.axis('off')
-    table = ax.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center', colColours=["#f2f2f2"]*5)
-    table.auto_set_font_size(False); table.set_fontsize(10); table.scale(1.2, 2.0)
+    table = ax.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center', colColours=["#f2f2f2"]*7)
+    table.auto_set_font_size(False); table.set_fontsize(9); table.scale(1.1, 2.2)
     for i in range(len(data)):
-        val = float(df.iloc[i, 2].replace('%',''))
-        table[(i+1, 2)].set_facecolor("#c6efce" if val > 0 else "#ffc7ce")
-        if "STRONG BUY" in df.iloc[i, 4]: table[(i+1, 4)].set_facecolor("#c6efce")
-    plt.title(f"Macro Strategic Report: India -> USA Exports\nGenerated: {datetime.now().strftime('%Y-%m-%d')}", fontsize=14, pad=20)
+        for col_idx in [2, 3, 4]:
+            val = float(df.iloc[i, col_idx].replace('%',''))
+            table[(i+1, col_idx)].set_facecolor("#c6efce" if val > 0 else "#ffc7ce")
+        if "STRONG BUY" in df.iloc[i, 6]: table[(i+1, 6)].set_facecolor("#c6efce")
+    plt.title(f"Macro Strategic Report: 3-Quarter Trend Analysis (India -> USA)\nGenerated: {datetime.now().strftime('%Y-%m-%d')}", fontsize=14, pad=20)
     img = "macro_visual_report.png"; plt.savefig(img, bbox_inches='tight', dpi=150); plt.close()
     return img
 
@@ -159,14 +175,12 @@ def send_macro_telegram_report(results, log_file):
         url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendPhoto"
         with open(report_img, 'rb') as photo:
             requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "caption": "📊 <b>Monthly Strategic Macro Table</b>", "parse_mode": "HTML"}, files={"photo": photo})
-    # 2. Send the Historical Context as Text (Last 30 for deeper trend view)
     timestamp = datetime.now().strftime("%Y-%m-%d")
     report_msg = f"📜 <b>Historical Context ({timestamp})</b>\n"
     if os.path.exists(log_file):
         hist_df = pd.read_csv(log_file).tail(30)
         for _, h_row in hist_df.iterrows():
             report_msg += f"• {h_row['Ticker']}: {h_row['Growth_QoQ']:+.1f}% ({h_row['Verdict']})\n"
-
     requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage", data={"chat_id": TELEGRAM_CHAT_ID, "text": report_msg, "parse_mode": "HTML"})
 
 if __name__ == "__main__":
