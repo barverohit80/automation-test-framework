@@ -228,8 +228,18 @@ def send_macro_telegram_report(results, log_file):
     """Sends the monthly macro summary and historical context to Telegram."""
     timestamp = datetime.now().strftime("%Y-%m-%d")
     
+    # Calculate the quarter names being compared
+    # Current month usually represents data with a 2-3 month lag
+    current_date = datetime.now()
+    # Approx quarter based on typical lag
+    q_end = (current_date.month - 1) // 3
+    q_name = f"Q{q_end if q_end > 0 else 4}"
+    prev_q_name = f"Q{q_end - 1 if q_end > 1 else 4}"
+    comparison_period = f"{q_name} vs {prev_q_name}"
+
     # 1. Latest Report
-    report_msg = f"📊 <b>Monthly Macro Report ({timestamp})</b>\n\n"
+    report_msg = f"📊 <b>Monthly Macro Report ({timestamp})</b>\n"
+    report_msg += f"<i>Period: {comparison_period}</i>\n\n"
     report_msg += "<b>Top Sector Verdicts:</b>\n"
     
     # Sort results to show Strong Buys first
