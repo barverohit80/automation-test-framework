@@ -12,117 +12,75 @@ import time
 TRADE_TO_STOCK_MAP = {
     "29": {
         "sector": "Organic & Specialty Chemicals",
-        "description": "Organic chemicals, fluorochemicals, and intermediates",
-        "tickers": ["SRF.NS", "PIDILITIND.NS", "AARTIIND.NS", "DEEPAKNTR.NS", "ATUL.NS", "VINATIORGA.NS", "NAVINFLUOR.NS", "CLEAN.NS"]
+        "tickers": ["SRF.NS", "PIDILITIND.NS", "AARTIIND.NS"],
+        "us_customer": "Dow, DuPont, BASF US"
     },
     "30": {
         "sector": "Pharmaceuticals & APIs",
-        "description": "Formulations, generic drugs, and Active Pharmaceutical Ingredients",
-        "tickers": ["SUNPHARMA.NS", "DIVISLAB.NS", "DRREDDY.NS", "CIPLA.NS", "AUROPHARMA.NS", "SYNGENE.NS", "LAURUSLABS.NS", "GLAND.NS"]
+        "tickers": ["SUNPHARMA.NS", "DIVISLAB.NS", "DRREDDY.NS"],
+        "us_customer": "Pfizer, CVS Health, Teva US"
     },
     "61_62": {
         "sector": "Textiles & Apparel",
-        "description": "Knitted and non-knitted apparel, garments, and retail sourcing",
-        "tickers": ["KPRMILL.NS", "GOKEX.NS", "VTL.NS", "WELSPUNLIV.NS", "TRIDENT.NS", "ARVIND.NS", "PAGEIND.NS", "SPAL.NS"]
+        "tickers": ["KPRMILL.NS", "GOKEX.NS", "WELSPUNLIV.NS"],
+        "us_customer": "Walmart, Gap, Nike, Target"
     },
     "8504": {
         "sector": "Electrical Machinery & EMS",
-        "description": "Transformers, static converters, and Electronic Manufacturing Services",
-        "tickers": ["DIXON.NS", "KAYNES.NS", "SYRMA.NS", "CGPOWER.NS", "CYIENTDLM.NS", "DCXINDIA.NS", "CENTUM.NS"]
-    },
-    "850440": {
-        "sector": "Data Center - Power Backups & UPS",
-        "description": "Static converters, Uninterruptible Power Supplies (UPS), and inverters",
-        "tickers": ["ABB.NS", "SIEMENS.NS", "POWERINDIA.NS", "CUMMINSIND.NS", "HONAUT.NS"]
-    },
-    "841582": {
-        "sector": "Data Center - Precision Cooling",
-        "description": "Industrial air conditioning and cooling equipment",
-        "tickers": ["VOLTAS.NS", "BLUESTARCO.NS", "AMBER.NS", "THERMAX.NS"]
-    },
-    "847150": {
-        "sector": "Data Center - AI & Server Infrastructure",
-        "description": "Digital processing units, server assemblies, and hardware",
-        "tickers": ["NETWEB.NS", "E2ENET.NS", "AVALON.NS", "OLECTRA.NS"]
-    },
-    "854142": {
-        "sector": "Renewable Energy - Solar Cells & Modules",
-        "description": "Solar cells, photovoltaic modules, and assembled panels",
-        "tickers": ["WAAREEENER.NS", "PREMIERENE.NS", "BORORENEW.NS", "SWSOLAR.NS", "WEBSOL.NS"]
-    },
-    "850231": {
-        "sector": "Renewable Energy - Wind Turbines",
-        "description": "Wind-powered generating sets and turbine components",
-        "tickers": ["SUZLON.NS", "INOXWIND.NS"]
+        "tickers": ["DIXON.NS", "KAYNES.NS", "CGPOWER.NS"],
+        "us_customer": "Google, Cisco, GE Grid"
     },
     "8803": {
-        "sector": "Defense & Aerospace - Components",
-        "description": "Parts of aircraft, spacecraft, and satellite assemblies",
-        "tickers": ["HAL.NS", "MTARTECH.NS", "BEL.NS", "DATAPATTNS.NS", "ASTRAMICRO.NS"]
+        "sector": "Defense & Aerospace",
+        "tickers": ["HAL.NS", "MTARTECH.NS", "BEL.NS"],
+        "us_customer": "Boeing, Lockheed Martin, GE"
     },
     "9306": {
-        "sector": "Defense - Munitions & Explosives",
-        "description": "Bombs, grenades, missiles, and ammunition components",
-        "tickers": ["SOLARINDS.NS", "PREMEXPLN.NS"]
+        "sector": "Defense - Munitions",
+        "tickers": ["SOLARINDS.NS", "PREMEXPLN.NS"],
+        "us_customer": "US Dept of Defense (via primes)"
     },
     "8501": {
-        "sector": "Clean Energy - Fuel Cells & Motors",
-        "description": "Electric motors, generators, and fuel cell power modules",
-        "tickers": ["MTARTECH.NS", "TDPOWERSYS.NS", "KIRLOSENG.NS"]
+        "sector": "Clean Energy - Fuel Cells",
+        "tickers": ["MTARTECH.NS", "TDPOWERSYS.NS"],
+        "us_customer": "Bloom Energy (USA)"
     },
     "8708": {
-        "sector": "Auto Components - Exports",
-        "description": "Parts and accessories of motor vehicles",
-        "tickers": ["BHARATFORG.NS", "MOTHERSON.NS", "SONACOMS.NS", "BALKRISIND.NS", "UNOMINDA.NS", "BOSCHLTD.NS"]
+        "sector": "Auto Components",
+        "tickers": ["BHARATFORG.NS", "MOTHERSON.NS"],
+        "us_customer": "Cummins, PACCAR, GM, Ford"
     },
     "3808": {
-        "sector": "Agrochemicals - Exports",
-        "description": "Insecticides, fungicides, and herbicides",
-        "tickers": ["PIIND.NS", "UPL.NS", "SHARDACROP.NS", "SUMICHEM.NS", "RALLIS.NS"]
+        "sector": "Agrochemicals",
+        "tickers": ["PIIND.NS", "UPL.NS", "SHARDACROP.NS"],
+        "us_customer": "FMC Corp, Corteva, Bayer US"
     },
     "8607": {
-        "sector": "Railway Components - Exports",
-        "description": "Parts of railway locomotives and rolling-stock",
-        "tickers": ["JWL.NS", "TEXRAIL.NS", "TITAGARH.NS", "RKFORGING.NS", "TIMKEN.NS"]
+        "sector": "Railway Components",
+        "tickers": ["JWL.NS", "TEXRAIL.NS"],
+        "us_customer": "Wabtec, Progress Rail (Caterpillar)"
     },
     "71": {
-        "sector": "Gems & Jewelry - Exports",
-        "description": "Diamonds, precious stones, and jewelry",
-        "tickers": ["GOLDIAM.NS", "RENAISSANCE.NS", "VAIBHAVGBL.NS", "TITAN.NS", "KALYANKJIL.NS", "RAJESHEXPO.NS", "ASIANSTAR.NS"]
+        "sector": "Gems & Jewelry",
+        "tickers": ["GOLDIAM.NS", "TITAN.NS"],
+        "us_customer": "Signet (Kay/Zales), Amazon US"
     }
 }
 
 # =====================================================================
 # 2. UTILITY FUNCTIONS FOR FETCHING AND PROCESSING DATA
 # =====================================================================
-import time
-
 def fetch_us_import_data(hs_code):
-    """
-    EXPERT MODEL: Fetches 24 months of trade data to identify structural 
-    shifts rather than temporary noise.
-    """
     REPORTER = "842"
     PARTNER = "699"
     BASE_URL = "https://comtradeapi.un.org/public/v1/preview/C/M/HS"
-    
-    # Generate 24-month period list
-    periods = []
-    # We span 3 years to ensure we get a full 24-month window after accounting for lag
-    for year in [2024, 2025, 2026]:
-        for month in range(1, 13):
-            periods.append(f"{year}{month:02d}")
-    
-    # UN Comtrade Public API limit is usually 12 periods per call, 
-    # but some endpoints allow more. We'll fetch in two chunks to be safe.
+    periods = [f"{y}{m:02d}" for y in [2024, 2025, 2026] for m in range(1, 13)]
     period_chunks = [",".join(periods[0:12]), ",".join(periods[12:24])]
-    
     all_dfs = []
     hs_list = hs_code.split("_")
-    
     for hs in hs_list:
         for p_str in period_chunks:
-            time.sleep(1.2) # Rate limit protection
+            time.sleep(1.2)
             try:
                 params = {"reporterCode": REPORTER, "partnerCode": PARTNER, "flowCode": "M", "cmdCode": hs, "period": p_str}
                 response = requests.get(BASE_URL, params=params)
@@ -130,196 +88,101 @@ def fetch_us_import_data(hs_code):
                     data = response.json()
                     if data.get('data'):
                         all_dfs.append(pd.DataFrame(data['data']))
-            except Exception as e:
-                print(f"Error fetching chunk: {e}")
-
-    if not all_dfs:
-        return pd.DataFrame()
-
+            except Exception as e: print(f"Error fetching: {e}")
+    if not all_dfs: return pd.DataFrame()
     combined_df = pd.concat(all_dfs).groupby('period')['primaryValue'].sum().reset_index()
     combined_df['Date'] = pd.to_datetime(combined_df['period'], format='%Y%m')
     combined_df = combined_df.rename(columns={'primaryValue': 'Import_Value_USD'})
-    
-    # EXPERT FILTER: Apply 3-month rolling average to smooth out shipment timing noise
     combined_df = combined_df.sort_values('Date')
     combined_df['Import_Value_USD_Smoothed'] = combined_df['Import_Value_USD'].rolling(window=3).mean()
-    
     combined_df['YearMonth'] = combined_df['Date'].dt.to_period('M')
     return combined_df
 
 def process_and_plot_signals(hs_code, target_ticker, alert_threshold=10.0):
-    """
-    EXPERT ANALYSIS: Synchronizes 24 months of trade data with stock price 
-    performance to generate actionable signals.
-    """
     sector_info = TRADE_TO_STOCK_MAP[hs_code]
     report_dir = "reports"
-    if not os.path.exists(report_dir):
-        os.makedirs(report_dir)
-    
+    if not os.path.exists(report_dir): os.makedirs(report_dir)
     trade_df = fetch_us_import_data(hs_code)
-    
     if trade_df.empty or trade_df['Import_Value_USD_Smoothed'].isnull().all():
         return {"sector": sector_info['sector'], "ticker": target_ticker, "status": "Error: Insufficient Data"}
-    
     try:
-        # Fetch stock data matching the trade timeframe
         start_date = trade_df['Date'].min().strftime('%Y-%m-%d')
         end_date = (trade_df['Date'].max() + pd.DateOffset(months=1)).strftime('%Y-%m-%d')
-        
         stock = yf.Ticker(target_ticker)
         stock_df = stock.history(start=start_date, end=end_date)
-        
-        if stock_df.empty:
-             return {"sector": sector_info['sector'], "ticker": target_ticker, "status": "Error: No Stock Data"}
-        
+        if stock_df.empty: return {"sector": sector_info['sector'], "ticker": target_ticker, "status": "Error: No Stock Data"}
         stock_monthly = stock_df['Close'].resample('ME').last().reset_index()
         stock_monthly['YearMonth'] = stock_monthly['Date'].dt.tz_localize(None).dt.to_period('M')
-        
-        # SYNC: Merge trade and stock data
         merged = pd.merge(trade_df, stock_monthly, on='YearMonth', suffixes=('_trade', '_stock'))
-        
-        if merged.shape[0] < 4:
-            return {"sector": sector_info['sector'], "ticker": target_ticker, "status": "Error: Data Gap"}
-
-        # EXPERT SIGNAL: Compare latest 3-month avg vs previous 3-month avg
+        if merged.shape[0] < 4: return {"sector": sector_info['sector'], "ticker": target_ticker, "status": "Error: Data Gap"}
         latest_avg = merged['Import_Value_USD_Smoothed'].iloc[-1]
         prev_avg = merged['Import_Value_USD_Smoothed'].iloc[-4]
         recent_growth = ((latest_avg - prev_avg) / prev_avg) * 100
-        
-        # RENDER: Professional dual-axis visualization
         fig, ax1 = plt.subplots(figsize=(12, 6))
-        ax1.set_xlabel('Timeline (Last 24 Months)')
-        ax1.set_ylabel('US Imports (USD) - 3mo Moving Avg', color='navy')
-        ax1.plot(merged['Date_trade'], merged['Import_Value_USD_Smoothed'], color='navy', linewidth=3, label='Trade Flow (Smoothed)')
-        ax1.tick_params(axis='y', labelcolor='navy')
-        ax1.grid(True, linestyle='--', alpha=0.3)
-        
+        ax1.plot(merged['Date_trade'], merged['Import_Value_USD_Smoothed'], color='navy', linewidth=3)
         ax2 = ax1.twinx()
-        ax2.set_ylabel(f'{target_ticker} Price (INR)', color='forestgreen')
-        ax2.plot(merged['Date_trade'], merged['Close'], color='forestgreen', linewidth=2, linestyle='--', label='Equity Value')
-        ax2.tick_params(axis='y', labelcolor='forestgreen')
-        
-        plt.title(f"EXPERT MACRO CORRELATION: {sector_info['sector']}\nTicker: {target_ticker} | Signal: {recent_growth:+.1f}% Growth (QoQ)", fontsize=13)
-        fig.tight_layout()
-        
+        ax2.plot(merged['Date_trade'], merged['Close'], color='forestgreen', linewidth=2, linestyle='--')
+        plt.title(f"{sector_info['sector']} ({target_ticker}) | Growth: {recent_growth:+.1f}%")
         filename = f"{report_dir}/{sector_info['sector'].replace(' ', '_')}_{target_ticker}.png"
-        plt.savefig(filename)
-        plt.close()
-        
-        return {
-            "sector": sector_info['sector'],
-            "ticker": target_ticker,
-            "growth": recent_growth,
-            "signal": recent_growth >= alert_threshold,
-            "chart": filename,
-            "status": "Success"
-        }
+        plt.savefig(filename); plt.close()
+        return {"sector": sector_info['sector'], "ticker": target_ticker, "growth": recent_growth, "signal": recent_growth >= alert_threshold, "chart": filename, "status": "Success"}
+    except Exception as e: return {"sector": sector_info['sector'], "ticker": target_ticker, "status": f"Error: {e}"}
 
-    except Exception as e:
-        return {"sector": TRADE_TO_STOCK_MAP[hs_code]['sector'], "ticker": target_ticker, "status": f"Error: {e}"}
-
+def create_visual_report_table(results):
+    data = []
+    for r in results:
+        if r['status'] == "Success":
+            verdict = "STRONG BUY" if r['signal'] else "WATCHLIST"
+            us_cust = TRADE_TO_STOCK_MAP.get(next(k for k, v in TRADE_TO_STOCK_MAP.items() if v['sector'] == r['sector']), {}).get('us_customer', 'N/A')
+            data.append([r['sector'], r['ticker'], f"{r['growth']:+.1f}%", us_cust, verdict])
+    if not data: return None
+    df = pd.DataFrame(data, columns=['Sector', 'Ticker', 'Growth', 'US Customer', 'Verdict'])
+    fig, ax = plt.subplots(figsize=(14, len(data)*0.6 + 2))
+    ax.axis('off')
+    table = ax.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center', colColours=["#f2f2f2"]*5)
+    table.auto_set_font_size(False); table.set_fontsize(10); table.scale(1.2, 2.0)
+    for i in range(len(data)):
+        val = float(df.iloc[i, 2].replace('%',''))
+        table[(i+1, 2)].set_facecolor("#c6efce" if val > 0 else "#ffc7ce")
+        if "STRONG BUY" in df.iloc[i, 4]: table[(i+1, 4)].set_facecolor("#c6efce")
+    plt.title(f"Macro Strategic Report: India -> USA Exports\nGenerated: {datetime.now().strftime('%Y-%m-%d')}", fontsize=14, pad=20)
+    img = "macro_visual_report.png"; plt.savefig(img, bbox_inches='tight', dpi=150); plt.close()
+    return img
 
 # TELEGRAM CONFIGURATION
 TELEGRAM_TOKEN = "8697229689:AAG5KT06bio6I2adEQ--rKicOcsXtPFxWYc"
 TELEGRAM_CHAT_ID = "-1003824534754"
 
 def send_macro_telegram_report(results, log_file):
-    """Sends the monthly macro summary and historical context to Telegram."""
+    report_img = create_visual_report_table(results)
+    if report_img:
+        url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendPhoto"
+        with open(report_img, 'rb') as photo:
+            requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "caption": "📊 <b>Monthly Strategic Macro Table</b>", "parse_mode": "HTML"}, files={"photo": photo})
+    
     timestamp = datetime.now().strftime("%Y-%m-%d")
-    
-    # Calculate the quarter names being compared
-    # Current month usually represents data with a 2-3 month lag
-    current_date = datetime.now()
-    # Approx quarter based on typical lag
-    q_end = (current_date.month - 1) // 3
-    q_name = f"Q{q_end if q_end > 0 else 4}"
-    prev_q_name = f"Q{q_end - 1 if q_end > 1 else 4}"
-    comparison_period = f"{q_name} vs {prev_q_name}"
-
-    # 1. Latest Report
-    report_msg = f"📊 <b>Monthly Macro Report ({timestamp})</b>\n"
-    report_msg += f"<i>Period: {comparison_period}</i>\n\n"
-    report_msg += "<b>Top Sector Verdicts:</b>\n"
-    
-    # Sort results to show Strong Buys first
-    sorted_res = sorted([r for r in results if r['status'] == "Success"], key=lambda x: x['growth'], reverse=True)
-    
-    for r in sorted_res[:5]: # Show top 5
-        icon = "🚀" if r['signal'] else "🕒"
-        report_msg += f"{icon} {r['sector']}: {r['growth']:+.1f}%\n"
-
-    # 2. Historical Context (Last 10 changes)
+    report_msg = f"📜 <b>Historical Context ({timestamp})</b>\n"
     if os.path.exists(log_file):
         hist_df = pd.read_csv(log_file).tail(10)
-        report_msg += "\n📜 <b>Last 10 Macro Signals:</b>\n"
         for _, h_row in hist_df.iterrows():
             report_msg += f"• {h_row['Ticker']}: {h_row['Growth_QoQ']:+.1f}% ({h_row['Verdict']})\n"
+    requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage", data={"chat_id": TELEGRAM_CHAT_ID, "text": report_msg, "parse_mode": "HTML"})
 
-    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "text": report_msg, "parse_mode": "HTML"})
-
-# =====================================================================
-# 3. SCRIPT EXECUTION ENTRY POINT
-# =====================================================================
 if __name__ == "__main__":
-    print("===============================================================")
-    print(" LAUNCHING US EXPORT -> INDIAN EQUITIES TRACKING SYSTEM ")
-    print("===============================================================")
-    
-    # Initial heartbeat
-    requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage", 
-                  data={"chat_id": TELEGRAM_CHAT_ID, "text": "🔍 <b>Monthly Macro Scan Started...</b>", "parse_mode": "HTML"})
-
+    requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage", data={"chat_id": TELEGRAM_CHAT_ID, "text": "🔍 <b>Monthly Macro Scan Started...</b>", "parse_mode": "HTML"})
     results = []
-    
     for hs_code, info in TRADE_TO_STOCK_MAP.items():
-        lead_ticker = info['tickers'][0]
-        print(f"-> Processing: {info['sector']}...")
-        res = process_and_plot_signals(hs_code=hs_code, target_ticker=lead_ticker)
+        res = process_and_plot_signals(hs_code=hs_code, target_ticker=info['tickers'][0])
         results.append(res)
-    
-    # FINAL VERDICT REPORT
-    print("\n" + "="*60)
-    print(f"{'STRATEGIC MACRO VERDICT REPORT':^60}")
-    print("="*60)
-    print(f"{'SECTOR':<30} | {'TICKER':<12} | {'GROWTH':<8} | {'VERDICT'}")
-    print("-" * 60)
-    
-    # Prepare historical logging
     log_file = "historical_verdicts.csv"
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
     log_data = []
-
     for r in results:
         if r['status'] == "Success":
             verdict = "🚀 STRONG BUY" if r['signal'] else "🕒 WATCHLIST"
-            growth_str = f"{r['growth']:.1f}%"
-            print(f"{r['sector']:<30} | {r['ticker']:<12} | {growth_str:<8} | {verdict}")
-            
-            # Add to log
-            log_data.append({
-                "Date": timestamp,
-                "Sector": r['sector'],
-                "Ticker": r['ticker'],
-                "Growth_QoQ": r['growth'],
-                "Verdict": verdict
-            })
-        else:
-            print(f"{r['sector']:<30} | {r['ticker']:<12} | {'N/A':<8} | ❌ {r['status']}")
-
-    # Save to Historical Log
+            log_data.append({"Date": timestamp, "Sector": r['sector'], "Ticker": r['ticker'], "Growth_QoQ": r['growth'], "Verdict": verdict})
     if log_data:
         log_df = pd.DataFrame(log_data)
-        if not os.path.exists(log_file):
-            log_df.to_csv(log_file, index=False)
-        else:
-            log_df.to_csv(log_file, mode='a', header=False, index=False)
-        print(f"\n✅ Historical trends updated in: {os.path.abspath(log_file)}")
-        
-        # SEND TELEGRAM REPORT
+        if not os.path.exists(log_file): log_df.to_csv(log_file, index=False)
+        else: log_df.to_csv(log_file, mode='a', header=False, index=False)
         send_macro_telegram_report(results, log_file)
-            
-    print("-" * 60)
-    print(f"Charts saved in: {os.path.abspath('reports/')}")
-    print("="*60)
