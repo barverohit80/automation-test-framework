@@ -139,11 +139,11 @@ def run_screener():
         # Final completion message
         end_time = datetime.now().strftime("%Y-%m-%d %H:%M")
         
-        # EXPERT ADDITION: Fetch last 10 historical results
+        # EXPERT ADDITION: Fetch last 30 historical results for better trend spotting
         history_msg = ""
         if os.path.exists(log_file):
-            history_df = pd.read_csv(log_file).tail(10)
-            history_msg = "\n\n<b>📜 Last 10 Circuit Leaders:</b>\n"
+            history_df = pd.read_csv(log_file).tail(30)
+            history_msg = "\n\n<b>📜 Last 30 Circuit Leaders:</b>\n"
             for _, h_row in history_df.iterrows():
                 history_msg += f"• {h_row['Symbol']} ({h_row['Date']})\n"
 

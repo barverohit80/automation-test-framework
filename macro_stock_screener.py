@@ -159,13 +159,14 @@ def send_macro_telegram_report(results, log_file):
         url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendPhoto"
         with open(report_img, 'rb') as photo:
             requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "caption": "📊 <b>Monthly Strategic Macro Table</b>", "parse_mode": "HTML"}, files={"photo": photo})
-    
+    # 2. Send the Historical Context as Text (Last 30 for deeper trend view)
     timestamp = datetime.now().strftime("%Y-%m-%d")
     report_msg = f"📜 <b>Historical Context ({timestamp})</b>\n"
     if os.path.exists(log_file):
-        hist_df = pd.read_csv(log_file).tail(10)
+        hist_df = pd.read_csv(log_file).tail(30)
         for _, h_row in hist_df.iterrows():
             report_msg += f"• {h_row['Ticker']}: {h_row['Growth_QoQ']:+.1f}% ({h_row['Verdict']})\n"
+
     requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage", data={"chat_id": TELEGRAM_CHAT_ID, "text": report_msg, "parse_mode": "HTML"})
 
 if __name__ == "__main__":
