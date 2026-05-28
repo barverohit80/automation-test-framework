@@ -63,7 +63,7 @@ def run_screener():
     print("===============================================================")
     print("Fetching data from NSE... (this may take a minute)")
     
-    # Heartbeat message to confirm bot is working
+    # Heartbeat message
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "text": f"🔍 <b>Screener Active</b>\nRun started at {timestamp} IST", "parse_mode": "HTML"})
@@ -79,67 +79,48 @@ def run_screener():
         # Ensure numeric types for filtering
         hitters_df['pChange'] = pd.to_numeric(hitters_df['pChange'], errors='coerce')
         hitters_df['priceBand'] = pd.to_numeric(hitters_df['priceBand'], errors='coerce')
+        hitters_df['ltp'] = pd.to_numeric(hitters_df['ltp'], errors='coerce')
+        hitters_df['upper'] = pd.to_numeric(hitters_df['upper'], errors='coerce')
 
-        # Filter for Upper Circuit
-        upper_circuits_df = hitters_df[(hitters_df['pChange'] > 0) & (hitters_df['pChange'] >= (hitters_df['priceBand'] - 0.1))]
+        # Filter for Upper Circuit: Positive change and within 0.1% of the upper limit
+        upper_circuits_df = hitters_df[
+            (hitters_df['pChange'] > 0) & 
+            ((hitters_df['ltp'] >= hitters_df['upper'] - 0.05) | 
+             (hitters_df['pChange'] >= (hitters_df['priceBand'] - 0.1)))
+        ]
 
+        results = []
         if upper_circuits_df.empty:
-            print("No stocks hit the upper circuit today.")
-            results = []
+            print("No stocks hit the upper circuit according to NSE data.")
         else:
-            print(f"Found {len(upper_circuits_df)} stocks at upper circuit. Filtering by Market Cap...")
+            print(f"Found {len(upper_circuits_df)} total stocks at upper circuit.")
+            print("Filtering by Market Cap (> ₹500 Cr)...")
             
-            results = []
             for index, row in upper_circuits_df.iterrows():
                 symbol = row['symbol']
                 nse_symbol = f"{symbol}.NS"
-                
                 mcap = get_market_cap_in_cr(nse_symbol)
                 
                 if mcap >= 500:
-                    print(f"-> Qualified: {symbol} (M-Cap: ₹{mcap:,.0f} Cr)")
-                    
+                    print(f"✅ QUALIFIED: {symbol} (M-Cap: ₹{mcap:,.0f} Cr)")
                     reason = get_latest_news_headline(symbol)
-                    
-                    # SEND TELEGRAM ALERT
                     send_telegram_alert(symbol, mcap, row['ltp'], reason)
-                    
                     results.append({
-                        "Symbol": symbol,
-                        "LTP": row['ltp'],
-                        "Change%": f"{row['pChange']}%",
-                        "Market Cap (Cr)": f"₹{mcap:,.0f}",
-                        "Catalyst/Reason": reason
+                        "Symbol": symbol, "LTP": row['ltp'], "Change%": f"{row['pChange']}%",
+                        "Market Cap (Cr)": f"₹{mcap:,.0f}", "Catalyst/Reason": reason, "Date": datetime.now().strftime("%Y-%m-%d")
                     })
-                    time.sleep(1)
+                else:
+                    print(f"❌ REJECTED: {symbol} (M-Cap: ₹{mcap:,.1f} Cr is too small)")
+                time.sleep(1)
 
         # 4. Final Report
+        log_file = "daily_circuit_log.csv"
         if results:
             df_report = pd.DataFrame(results)
-            print("\n" + "="*80)
-            header_text = "TODAY'S UPPER CIRCUIT LEADERS (> ₹500 Cr)"
-            print(f"{header_text:^80}")
-            print("="*80)
-            print(df_report.to_string(index=False))
-            print("="*80)
-            
-            # Save to log
-            log_file = "daily_circuit_log.csv"
-            log_timestamp = datetime.now().strftime("%Y-%m-%d")
-            df_report['Date'] = log_timestamp
-            
-            if not os.path.exists(log_file):
-                df_report.to_csv(log_file, index=False)
-            else:
-                df_report.to_csv(log_file, mode='a', header=False, index=False)
-            print(f"\nReport saved to: {os.path.abspath(log_file)}")
-        else:
-            print("\nNo stocks above ₹500 Cr hit the upper circuit today.")
+            if not os.path.exists(log_file): df_report.to_csv(log_file, index=False)
+            else: df_report.to_csv(log_file, mode='a', header=False, index=False)
 
-        # Final completion message
-        end_time = datetime.now().strftime("%Y-%m-%d %H:%M")
-        
-        # EXPERT ADDITION: Fetch last 30 historical results for better trend spotting
+        # Final completion message with history
         history_msg = ""
         if os.path.exists(log_file):
             history_df = pd.read_csv(log_file).tail(30)
@@ -147,18 +128,12 @@ def run_screener():
             for _, h_row in history_df.iterrows():
                 history_msg += f"• {h_row['Symbol']} ({h_row['Date']})\n"
 
-        finish_msg = (
-            f"✅ <b>Screener Finished</b>\n"
-            f"End time: {end_time} IST\n"
-            f"Stocks Identified: {len(results)}"
-            f"{history_msg}"
-        )
+        finish_msg = f"✅ <b>Screener Finished</b>\nEnd time: {datetime.now().strftime('%Y-%m-%d %H:%M')} IST\nStocks Identified: {len(results)}{history_msg}"
         requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "text": finish_msg, "parse_mode": "HTML"})
 
     except Exception as e:
         print(f"An error occurred: {e}")
-        error_msg = f"❌ <b>Screener Error</b>\n{str(e)}"
-        requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "text": error_msg, "parse_mode": "HTML"})
+        requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "text": f"❌ <b>Screener Error</b>\n{str(e)}", "parse_mode": "HTML"})
 
 if __name__ == "__main__":
     run_screener()
