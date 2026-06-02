@@ -80,14 +80,21 @@ def run_screener():
         hitters_df['pChange'] = pd.to_numeric(hitters_df['pChange'], errors='coerce')
         hitters_df['priceBand'] = pd.to_numeric(hitters_df['priceBand'], errors='coerce')
         hitters_df['ltp'] = pd.to_numeric(hitters_df['ltp'], errors='coerce')
-        hitters_df['upper'] = pd.to_numeric(hitters_df['upper'], errors='coerce')
-
-        # Filter for Upper Circuit: Positive change and within 0.1% of the upper limit
-        upper_circuits_df = hitters_df[
-            (hitters_df['pChange'] > 0) & 
-            ((hitters_df['ltp'] >= hitters_df['upper'] - 0.05) | 
-             (hitters_df['pChange'] >= (hitters_df['priceBand'] - 0.1)))
-        ]
+        
+        # Determine detection method based on available columns
+        if 'upper' in hitters_df.columns:
+            hitters_df['upper'] = pd.to_numeric(hitters_df['upper'], errors='coerce')
+            upper_circuits_df = hitters_df[
+                (hitters_df['pChange'] > 0) & 
+                ((hitters_df['ltp'] >= hitters_df['upper'] - 0.05) | 
+                 (hitters_df['pChange'] >= (hitters_df['priceBand'] - 0.1)))
+            ]
+        else:
+            # Fallback: Just use pChange vs priceBand
+            upper_circuits_df = hitters_df[
+                (hitters_df['pChange'] > 0) & 
+                (hitters_df['pChange'] >= (hitters_df['priceBand'] - 0.1))
+            ]
 
         results = []
         if upper_circuits_df.empty:
